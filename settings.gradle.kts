@@ -13,4 +13,4 @@
 //    }
 //}
 rootProject.name = "Meu Ticket"
-include(":app")
+include(":app") 

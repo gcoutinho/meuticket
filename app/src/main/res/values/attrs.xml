@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="label" format="string"/>
+    <attr name="icon" format="reference"/>
+    <attr name="hint" format="string"/>
+
+    <attr name="inputType">
+        <flag name="text" value="0x00000001" />
+        <flag name="textEmailAddress" value="0x00000021" />
+        <flag name="textPassword" value="0x00000081" />
+        <flag name="number" value="0x00000002" />
+        <flag name="numberSigned" value="0x00001002" />
+        <flag name="numberDecimal" value="0x00002002" />
+        <flag name="phone" value="0x00000003" />
+    </attr>
+
+    <attr name="imeOptions">
+        <flag name="actionGo" value="0x00000002" />
+        <flag name="actionSearch" value="0x00000003" />
+        <flag name="actionNext" value="0x00000005" />
+        <flag name="actionDone" value="0x00000006" />
+    </attr>
+
+    <declare-styleable name="ViewInput">
+        <attr name="label"/>
+        <attr name="drawableEnd" format="reference"/>
+        <attr name="imeOptions"/>
+        <attr name="inputType"/>
+        <attr name="hint"/>
+    </declare-styleable>
+
+    <declare-styleable name="ViewCard">
+        <attr name="label"/>
+        <attr name="icon"/>
+    </declare-styleable>
+</resources>

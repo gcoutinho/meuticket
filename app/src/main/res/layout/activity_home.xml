@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/light_2">
+
+        <com.meuticket.pos.ui.components.ViewToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ToolbarStyle"
+            android:id="@+id/toolbar"/>
+
+        <com.meuticket.pos.ui.components.ViewCard
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/card_order"
+            app:label="Venda"
+            app:icon="@drawable/ic_mdi_database_plus_outline"
+            android:layout_toLeftOf="@id/guideline"
+            android:layout_above="@id/guideline"/>
+
+        <com.meuticket.pos.ui.components.ViewCard
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/card_registers"
+            app:label="Cadastros"
+            app:icon="@drawable/ic_mdi_account_edit_outline"
+            android:layout_toRightOf="@id/guideline"
+            android:layout_above="@id/guideline"/>
+
+        <com.meuticket.pos.ui.components.ViewCard
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/card_admin"
+            app:label="Administração"
+            app:icon="@drawable/ic_mdi_archive_check_outline"
+            android:layout_toLeftOf="@id/guideline"
+            android:layout_below="@id/guideline"/>
+
+        <com.meuticket.pos.ui.components.ViewCard
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/card_settings"
+            app:label="Configurações"
+            app:icon="@drawable/ic_mdi_wrench_cog_outline"
+            android:layout_toRightOf="@id/guideline"
+            android:layout_below="@id/guideline"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:id="@+id/guideline"/>
+
+    </RelativeLayout>
+</layout>

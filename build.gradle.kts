@@ -12,6 +12,7 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+    apply("versions.gradle")
 }
 
 allprojects {
@@ -96,9 +97,22 @@ fun Project.configureAppAndroid() {
                 isDebuggable = true
             }
         }
-    }
-}
 
-//tasks.register("clean").configure {
-//    delete("build")
-//}
+        flavorDimensions("default")
+        productFlavors {
+
+            Config.Flavor.values().forEach { flavor ->
+
+                create(flavor.name) {
+                    manifestPlaceholders["name"] = flavor.name
+                    sourceSets {
+                        getting {
+                            resources.srcDirs("src/${flavor}/res", "src/${flavor}/res/")
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

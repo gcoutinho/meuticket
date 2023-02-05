@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_2">
+
+        <com.meuticket.pos.ui.components.ViewToolbar
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            style="@style/ToolbarStyle"
+            android:id="@+id/toolbar"/>
+
+        <com.meuticket.pos.ui.components.ViewInput
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_medium2"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:id="@+id/search"
+            app:drawableEnd="@drawable/ic_lupa"
+            app:imeOptions="actionSearch"
+            app:hint="Digite o código ou nome do produto"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/new_ticket_footer"
+            app:layout_constraintTop_toBottomOf="@id/search"
+            android:background="@drawable/list_bg"
+            android:paddingTop="@dimen/padding_large"
+            android:id="@+id/products_list"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/new_ticket_footer">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@color/light_pure"
+                android:id="@+id/new_ticket_pay_footer"
+                android:padding="@dimen/padding_medium2"
+                android:gravity="center">
+
+                <com.meuticket.pos.ui.components.ViewButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/go_to_cart"
+                    style="@style/SecondaryButton.SM"
+                    android:drawableStart="@drawable/ic_cart"
+                    android:drawablePadding="@dimen/padding_medium"
+                    android:layout_marginEnd="@dimen/margin_medium2"/>
+
+                <com.meuticket.pos.ui.components.ViewButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pagar R$ 0,00"
+                    android:id="@+id/pay"
+                    style="@style/PrimaryButton.SM"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@color/light_pure"
+                android:id="@+id/new_ticket_qtd_footer"
+                android:padding="@dimen/padding_medium2"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="@dimen/icon_medium"
+                    android:layout_height="@dimen/icon_medium"
+                    android:src="@drawable/ic_minus"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/removeOne"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:id="@+id/qtd"
+                    android:textSize="@dimen/font_size_large"
+                    android:layout_marginHorizontal="@dimen/margin_medium2"/>
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="@dimen/icon_medium"
+                    android:layout_height="@dimen/icon_medium"
+                    android:src="@drawable/ic_plus"
+                    android:tint="@color/secondary"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/addOne"/>
+
+                <com.meuticket.pos.ui.components.ViewButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Adicionar R$ 0,00"
+                    android:id="@+id/addToCart"
+                    style="@style/HighlightButton.SM"
+                    android:layout_marginStart="@dimen/margin_large"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.meuticket.pos.ui.components.ViewToolbar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        style="@style/ToolbarStyle"
+        android:id="@+id/toolbar"/>
+
+    <com.meuticket.pos.ui.components.ViewInput
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:label="Nome *"
+        android:id="@+id/name"
+        app:hint="Digite o nome da categoria"/>
+
+    <com.meuticket.pos.ui.components.ViewButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/PrimaryButton"
+        android:text="Cadastrar"
+        android:id="@+id/submit"
+        android:layout_gravity="center"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
