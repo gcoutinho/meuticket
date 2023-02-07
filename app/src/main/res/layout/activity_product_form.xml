@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         app:label="Valor *"
         android:id="@+id/value"
+        app:inputType="number"
         app:hint="Digite o valor do produto"/>
 
     <com.meuticket.pos.ui.components.ViewInput

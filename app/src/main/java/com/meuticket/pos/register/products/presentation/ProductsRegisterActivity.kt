@@ -38,7 +38,7 @@ class ProductsRegisterActivity: BaseMvvmActivity() {
 
                 }
                 is ProductsRegisterViewModelState.OpenEditScreen -> {
-                    startActivity(Intent(this, ProductFormActivity::class.java))
+                    startActivity(ProductFormActivity.newIntent(this, state.product))
                 }
             }
         })

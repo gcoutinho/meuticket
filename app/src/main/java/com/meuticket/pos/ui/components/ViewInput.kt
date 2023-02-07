@@ -3,9 +3,11 @@ package com.meuticket.pos.ui.components
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.text.InputType
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.use
@@ -22,6 +24,8 @@ class ViewInput @JvmOverloads constructor(
 
     val binding by viewBinding(true, ViewInputBinding::inflate)
 
+    val editText: EditText = binding.inputEditText
+
     var label: String = ""
         set(value) {
             field = value
@@ -33,10 +37,13 @@ class ViewInput @JvmOverloads constructor(
             }
         }
 
-    var text: String = ""
+    var text: String
      get() {
          return binding.inputEditText.text.toString()
      }
+    set(value) {
+        binding.inputEditText.setText(value)
+    }
 
     init {
         setupAttrs()
@@ -69,5 +76,9 @@ class ViewInput @JvmOverloads constructor(
             }
         }
         att.recycle()
+    }
+
+    fun addTextWatcher(watcher: TextWatcher) {
+        binding.inputEditText.addTextChangedListener(watcher)
     }
 }

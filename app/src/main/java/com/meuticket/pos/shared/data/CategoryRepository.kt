@@ -16,9 +16,11 @@ class CategoryRepositoryImpl @Inject constructor(
     override fun listFromRemote(): List<Category> {
         return mutableListOf(
             Category(
+                1,
                 "bebidas"
             ),
             Category(
+                2,
                 "lanches"
             ),
         )
