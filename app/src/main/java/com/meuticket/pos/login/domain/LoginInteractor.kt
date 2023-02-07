@@ -14,9 +14,7 @@ class LoginInteractorImpl @Inject constructor(
     val session: Session
 ): LoginInteractor {
     override fun doLogin(user: String, password: String): LoginResult {
-        return localStorage.getUsers().find {
-            it.name == user && it.password == password
-        }?.let {
+        return localStorage.findUser(user, password)?.let {
             session.loggedUser = it
 
             LoginResult(

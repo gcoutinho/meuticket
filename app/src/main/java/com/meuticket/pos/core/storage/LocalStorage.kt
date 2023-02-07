@@ -1,6 +1,8 @@
 package com.meuticket.pos.core.storage
 
 import android.content.SharedPreferences
+import android.util.Log
+import com.meuticket.pos.core.storage.dao.UserDao
 import com.meuticket.pos.shared.data.model.Category
 import com.meuticket.pos.shared.data.model.Product
 import com.meuticket.pos.shared.data.model.User
@@ -23,11 +25,13 @@ interface LocalStorage {
     fun getUsers(): List<User>
     fun saveUsers(data: List<User>)
     fun getCategories(): List<Category>
+    fun findUser(user: String, password: String): User?
 }
 
 class LocalStorageImpl @Inject constructor(
     val moshi: Moshi,
-    val sharedPreferences: SharedPreferences
+    val sharedPreferences: SharedPreferences,
+    val userDao: UserDao
 ): LocalStorage {
     override fun saveOrder() {
         TODO("Not yet implemented")
@@ -76,32 +80,18 @@ class LocalStorageImpl @Inject constructor(
     }
 
     override fun getUsers(): List<User> {
-        val usersString = sharedPreferences.getString(USERS_LIST, "")?:""
-
-        val listType: Type = Types.newParameterizedType(
-            List::class.java,
-            User::class.java
-        )
-        val adapter: JsonAdapter<List<User>> = moshi.adapter(listType)
 
         return try {
-            adapter.fromJson(usersString)?: emptyList()
+            val users = userDao.getAll()
+            users
         } catch (ex: Exception) {
+            Log.e("DB", ex.message?:ex.stackTraceToString())
             emptyList()
         }
     }
 
     override fun saveUsers(data: List<User>) {
-        val listType: Type = Types.newParameterizedType(
-            List::class.java,
-            User::class.java
-        )
-        val adapter: JsonAdapter<List<User>> = moshi.adapter(listType)
-
-        sharedPreferences
-            .edit()
-            .putString(USERS_LIST, adapter.toJson(data))
-            .apply()
+        userDao.insertAll(data)
     }
 
     override fun getCategories(): List<Category> {
@@ -120,9 +110,12 @@ class LocalStorageImpl @Inject constructor(
         }
     }
 
+    override fun findUser(user: String, password: String): User? {
+        return userDao.findByNamePassword(user, password)
+    }
+
     companion object {
         const val PRODUCTS_LIST = "products_list"
-        const val USERS_LIST = "users_list"
         const val CATEGORY_LIST = "category_list"
     }
 

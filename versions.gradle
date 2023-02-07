@@ -211,5 +211,8 @@ buildscript {
 
         // Flutter
         flutter_facade_version = '1.0.13'
+
+        room_version = "2.4.2"
+
     }
 }

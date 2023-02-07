@@ -1,3 +1,7 @@
+import Room.getRoom
+import Room.getRoomCompiler
+import Room.getRoomKtx
+
 android {
     packagingOptions {
         exclude("META-INF/*.kotlin_module")
@@ -22,6 +26,12 @@ android {
 dependencies {
 
     implementation("androidx.work:work-runtime-ktx:2.7.1")
+//    annotationProcessor("androidx.room:room-compiler:$room_version")
+
+    // To use Kotlin annotation processing tool (kapt)
+    implementation(Room.getRoom(rootProject))
+    kapt(Room.getRoomCompiler(rootProject))
+    implementation(Room.getRoomKtx(rootProject))
 
     safraImplementation(files("libs/IntegracaoSafra-v2.0.aar"))
 

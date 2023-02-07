@@ -3,6 +3,7 @@ package com.meuticket.pos.di
 import android.app.Application
 import com.meuticket.pos.CustomApplication
 import com.meuticket.pos.core.background.di.WorkersModule
+import com.meuticket.pos.core.storage.di.RoomModule
 import com.meuticket.pos.home.di.HomeModuleBuilder
 import com.meuticket.pos.register.di.RegisterModuleBuilder
 import com.meuticket.pos.login.di.LoginModuleBuilder
@@ -24,6 +25,7 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class,
         AppModule::class,
         WorkersModule::class,
+        RoomModule::class,
 
         LoginModuleBuilder::class,
         HomeModuleBuilder::class,

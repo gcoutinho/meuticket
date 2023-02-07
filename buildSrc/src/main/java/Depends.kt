@@ -82,6 +82,16 @@ object Support {
     const val ANDROIDX_CORE_VERSION = "androidx_core_ktx"
 }
 
+object Room {
+    fun getRoom(project: Project) = "androidx.room:room-runtime:${project.extra.get(ROOM_VERSION) as String}"
+    fun getRoomCompiler(project: Project) = "androidx.room:room-compiler:${project.extra.get(ROOM_VERSION) as String}"
+//    kapt("androidx.room:room-compiler:$room_version")
+//// optional - Kotlin Extensions and Coroutines support for Room
+    fun getRoomKtx(project: Project) = "androidx.room:room-ktx:${project.extra.get(ROOM_VERSION) as String}"
+
+    private const val ROOM_VERSION = "room_version"
+}
+
 object ViewModel {
     fun Project.getLifecycleExtensionsVersion() =
         "androidx.lifecycle:lifecycle-extensions:${extra.get(LIFECYCLE_VERSION) as String}"
