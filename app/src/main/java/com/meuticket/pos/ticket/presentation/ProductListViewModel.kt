@@ -6,7 +6,6 @@ import com.meuticket.pos.shared.data.model.Product
 import com.meuticket.pos.shared.domain.ProductsListInteractor
 import com.meuticket.pos.core.livedata.SingleLiveEvent
 import com.meuticket.pos.core.session.Cart
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,15 +30,12 @@ class ProductListViewModel @Inject constructor(
     override fun onCreate() {
         super.onCreate()
 
-        viewModelScope.launch {
-            runOn(Dispatchers.IO) {
-                products = interactor.listProducts()
-            }.onSuccess {
-                state.value = ProductListViewModelState.ProductsLoaded
-            }.onFailure {
-                it.printStackTrace()
-            }
-        }
+        runAsync(block = {
+            products = interactor.listProducts()
+        }, onSuccess = {
+            state.value = ProductListViewModelState.ProductsLoaded
+        })
+
         state.value = ProductListViewModelState.CartUpdated(cart.products.sumOf { it.qtd*it.value })
     }
 

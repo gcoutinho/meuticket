@@ -1,26 +1,37 @@
 
 package com.meuticket.pos.base
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 open class BaseViewModel : ViewModel(), LifecycleObserver {
 
-    suspend inline fun <R, T> T.runOn(
-        dispatcher: CoroutineDispatcher,
-        crossinline block: suspend T.() -> R
-    ): Result<R> =
-        withContext(dispatcher) {
-            try {
-                Result.success(block())
-            } catch (e: Throwable) {
-                Result.failure(e)
+    inline fun <R, T> T.runAsync(
+        dispatcher: CoroutineDispatcher = Dispatchers.IO,
+        noinline block: suspend T.() -> R,
+        crossinline onSuccess: (R) -> Unit = {},
+        crossinline onError: (ex: Throwable) -> Unit = {},
+    ) {
+        viewModelScope.launch {
+            withContext(dispatcher) {
+                try {
+                    val result = block()
+                    withContext(Dispatchers.Main) {
+                        onSuccess.invoke(result)
+                    }
+                } catch (e: Throwable) {
+                    e.printStackTrace()
+                    withContext(Dispatchers.Main) {
+                        onError.invoke(e)
+                    }
+                }
             }
         }
+    }
+
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     open fun onCreate() {

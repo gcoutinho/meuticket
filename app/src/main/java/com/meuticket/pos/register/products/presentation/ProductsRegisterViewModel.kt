@@ -5,7 +5,6 @@ import com.meuticket.pos.base.BaseViewModel
 import com.meuticket.pos.core.livedata.SingleLiveEvent
 import com.meuticket.pos.shared.data.model.Product
 import com.meuticket.pos.shared.domain.ProductsListInteractor
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,13 +24,13 @@ class ProductsRegisterViewModel @Inject constructor(
     override fun onCreate() {
         super.onCreate()
 
-        viewModelScope.launch {
-            runOn(Dispatchers.IO) {
+        runAsync(
+            block = {
                 products = interactor.listProducts()
-            }.onSuccess {
+            }, onSuccess = {
                 state.value = ProductsRegisterViewModelState.ProductsLoaded
             }
-        }
+        )
     }
 
     fun editClicked(product: Product) {
