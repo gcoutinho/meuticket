@@ -74,6 +74,9 @@ class ViewInput @JvmOverloads constructor(
             it.getString(R.styleable.ViewInput_hint)?.let {
                 binding.inputEditText.hint = it
             }
+            it.getString(R.styleable.ViewInput_text)?.let {
+                binding.inputEditText.setText(it)
+            }
         }
         att.recycle()
     }

@@ -1,9 +1,6 @@
 package com.meuticket.pos.core.storage.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.meuticket.pos.shared.data.model.User
 
 @Dao
@@ -17,7 +14,7 @@ interface UserDao {
     @Query("SELECT * FROM user WHERE name LIKE :first LIMIT 1")
     fun findByName(first: String): User
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(users: List<User>)
 
     @Delete

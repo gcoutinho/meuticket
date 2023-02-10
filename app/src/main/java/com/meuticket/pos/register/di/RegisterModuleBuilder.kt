@@ -3,6 +3,9 @@ package com.meuticket.pos.register.di
 import com.meuticket.pos.register.category.di.CategoryRegisterModule
 import com.meuticket.pos.register.category.presentation.CategoryFormActivity
 import com.meuticket.pos.register.category.presentation.CategoryRegisterActivity
+import com.meuticket.pos.register.event.di.EventRegisterModule
+import com.meuticket.pos.register.event.presentation.EventFormActivity
+import com.meuticket.pos.register.event.presentation.EventRegisterActivity
 import com.meuticket.pos.register.presentation.RegisterActivity
 import com.meuticket.pos.register.products.di.ProductsRegisterModule
 import com.meuticket.pos.register.products.presentation.ProductFormActivity
@@ -33,6 +36,12 @@ abstract class RegisterModuleBuilder {
 
     @ContributesAndroidInjector(modules = [CategoryRegisterModule::class])
     abstract fun bindCategoryRegisterActivity(): CategoryRegisterActivity
+
+    @ContributesAndroidInjector(modules = [EventRegisterModule::class])
+    abstract fun bindEventFormActivity(): EventFormActivity
+
+    @ContributesAndroidInjector(modules = [EventRegisterModule::class])
+    abstract fun bindEventRegisterActivity(): EventRegisterActivity
 
     @ContributesAndroidInjector(modules = [RegisterModule::class])
     abstract fun bindRegisterActivity(): RegisterActivity

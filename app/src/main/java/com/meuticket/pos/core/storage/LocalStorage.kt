@@ -1,15 +1,14 @@
 package com.meuticket.pos.core.storage
 
-import android.content.SharedPreferences
 import android.util.Log
+import com.meuticket.pos.core.storage.dao.CategoryDao
+import com.meuticket.pos.core.storage.dao.EventDao
+import com.meuticket.pos.core.storage.dao.ProductDao
 import com.meuticket.pos.core.storage.dao.UserDao
 import com.meuticket.pos.shared.data.model.Category
+import com.meuticket.pos.shared.data.model.Event
 import com.meuticket.pos.shared.data.model.Product
 import com.meuticket.pos.shared.data.model.User
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
-import java.lang.reflect.Type
 import javax.inject.Inject
 
 interface LocalStorage {
@@ -26,12 +25,15 @@ interface LocalStorage {
     fun saveUsers(data: List<User>)
     fun getCategories(): List<Category>
     fun findUser(user: String, password: String): User?
+    fun getEvents(): List<Event>
+    fun saveCategories(data: List<Category>)
 }
 
 class LocalStorageImpl @Inject constructor(
-    val moshi: Moshi,
-    val sharedPreferences: SharedPreferences,
-    val userDao: UserDao
+    val userDao: UserDao,
+    val productDao: ProductDao,
+    val categoryDao: CategoryDao,
+    val eventDao: EventDao
 ): LocalStorage {
     override fun saveOrder() {
         TODO("Not yet implemented")
@@ -50,33 +52,18 @@ class LocalStorageImpl @Inject constructor(
     }
 
     override fun getProducts(): List<Product> {
-        val productsString = sharedPreferences.getString(PRODUCTS_LIST, "")?:""
-
-        val listType: Type = Types.newParameterizedType(
-            List::class.java,
-            Product::class.java
-        )
-        val adapter: JsonAdapter<List<Product>> = moshi.adapter(listType)
 
         return try {
-            adapter.fromJson(productsString)?: emptyList()
+            productDao.getAll()
         } catch (ex: Exception) {
+            ex.printStackTrace()
             emptyList()
         }
     }
 
     override fun saveProducts(products: List<Product>) {
 
-        val listType: Type = Types.newParameterizedType(
-            List::class.java,
-            Product::class.java
-        )
-        val adapter: JsonAdapter<List<Product>> = moshi.adapter(listType)
-
-        sharedPreferences
-            .edit()
-            .putString(PRODUCTS_LIST, adapter.toJson(products))
-            .apply()
+        productDao.insertAll(products)
     }
 
     override fun getUsers(): List<User> {
@@ -95,19 +82,24 @@ class LocalStorageImpl @Inject constructor(
     }
 
     override fun getCategories(): List<Category> {
-        val dataString = sharedPreferences.getString(CATEGORY_LIST, "")?:""
-
-        val listType: Type = Types.newParameterizedType(
-            List::class.java,
-            Category::class.java
-        )
-        val adapter: JsonAdapter<List<Category>> = moshi.adapter(listType)
 
         return try {
-            adapter.fromJson(dataString)?: emptyList()
+            categoryDao.getAll()
         } catch (ex: Exception) {
             emptyList()
         }
+    }
+
+    override fun getEvents(): List<Event> {
+        return try {
+            eventDao.getAll()
+        } catch (ex: Exception) {
+            emptyList()
+        }
+    }
+
+    override fun saveCategories(data: List<Category>) {
+        categoryDao.insertAll(data)
     }
 
     override fun findUser(user: String, password: String): User? {

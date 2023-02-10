@@ -51,5 +51,6 @@ class CustomApplication @Inject constructor() : DaggerApplication() {
 
         asyncWorker.downloadProducts(this)
         asyncWorker.downloadUsers(this)
+        asyncWorker.downloadCategories(this)
     }
 }

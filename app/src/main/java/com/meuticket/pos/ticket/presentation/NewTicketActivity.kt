@@ -38,14 +38,14 @@ class NewTicketActivity: BaseMvvmActivity() {
 
         setupObservers()
         setupListeners()
-
-        loadItems()
-
     }
 
     private fun setupObservers() {
         viewModel.state.observe(this, SafeObserver { state ->
              when(state) {
+                 is ProductListViewModelState.ProductsLoaded -> {
+                     loadItems()
+                 }
                  is ProductListViewModelState.ShowQuantityPicker -> {
                      showQuantityPicker(state.product)
                  }

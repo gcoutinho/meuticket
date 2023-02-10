@@ -7,6 +7,7 @@ import com.meuticket.pos.base.BaseViewModel
 import com.meuticket.pos.base.viewBinding
 import com.meuticket.pos.databinding.ActivityRegisterBinding
 import com.meuticket.pos.register.category.presentation.CategoryRegisterActivity
+import com.meuticket.pos.register.event.presentation.EventRegisterActivity
 import com.meuticket.pos.register.products.presentation.ProductsRegisterActivity
 import com.meuticket.pos.register.users.presentation.UsersRegisterActivity
 
@@ -32,6 +33,8 @@ class RegisterActivity: BaseMvvmActivity() {
         binding.registerCategories.setOnClickListener {
             startActivity(Intent(this, CategoryRegisterActivity::class.java))
         }
-        binding.registerEvents.setOnClickListener {  }
+        binding.registerEvents.setOnClickListener {
+            startActivity(Intent(this, EventRegisterActivity::class.java))
+        }
     }
 }

@@ -13,7 +13,7 @@ class ProductsAdapter(val viewModel: ProductListViewModel): RecyclerView.Adapter
 
     lateinit var previousSelected: ViewProductCell
 
-    lateinit var localItems: MutableList<Product>
+    var localItems: MutableList<Product>
 
     init {
         localItems = viewModel.products.toMutableList()

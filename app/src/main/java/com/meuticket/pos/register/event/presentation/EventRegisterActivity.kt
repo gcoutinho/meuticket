@@ -1,4 +1,4 @@
-package com.meuticket.pos.register.products.presentation
+package com.meuticket.pos.register.event.presentation
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,21 +10,23 @@ import com.meuticket.pos.R
 import com.meuticket.pos.base.BaseMvvmActivity
 import com.meuticket.pos.base.viewBinding
 import com.meuticket.pos.core.livedata.SafeObserver
-import com.meuticket.pos.databinding.ActivityRegisterProductsBinding
-import com.meuticket.pos.register.products.presentation.adapter.ProductsRegisterAdapter
+import com.meuticket.pos.databinding.ActivityRegisterEventBinding
+import com.meuticket.pos.register.event.presentation.adapter.EventRegisterAdapter
 import com.meuticket.pos.ui.utils.hideKeyboard
 
-class ProductsRegisterActivity: BaseMvvmActivity() {
+class EventRegisterActivity: BaseMvvmActivity() {
 
-    val binding: ActivityRegisterProductsBinding by viewBinding(ActivityRegisterProductsBinding::inflate)
+    val binding: ActivityRegisterEventBinding by viewBinding(ActivityRegisterEventBinding::inflate)
 
-    val viewModel: ProductsRegisterViewModel by appViewModel()
+    val viewModel: EventRegisterViewModel by appViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(binding.root)
-        
+
+        loadItems()
+
         setupListener()
         setupObservers()
     }
@@ -32,14 +34,11 @@ class ProductsRegisterActivity: BaseMvvmActivity() {
     private fun setupObservers() {
         viewModel.state.observe(this, SafeObserver { state ->
             when(state) {
-                is ProductsRegisterViewModelState.ConfirmDelete -> {
+                is EventRegisterViewModelState.ConfirmDelete -> {
 
                 }
-                is ProductsRegisterViewModelState.OpenEditScreen -> {
-                    startActivity(ProductFormActivity.newIntent(this, state.product))
-                }
-                ProductsRegisterViewModelState.ProductsLoaded -> {
-                    loadItems()
+                is EventRegisterViewModelState.OpenEditScreen -> {
+                    startActivity(Intent(this, EventFormActivity::class.java))
                 }
             }
         })
@@ -61,12 +60,12 @@ class ProductsRegisterActivity: BaseMvvmActivity() {
     }
 
     private fun loadItems() {
-        binding.productsList.layoutManager = LinearLayoutManager(this)
-        binding.productsList.adapter = ProductsRegisterAdapter(viewModel)
+        binding.eventList.layoutManager = LinearLayoutManager(this)
+        binding.eventList.adapter = EventRegisterAdapter(viewModel)
     }
 
     private fun doSearch(text: String) {
-        (binding.productsList.adapter as ProductsRegisterAdapter).filter(text)
+        (binding.eventList.adapter as EventRegisterAdapter).filter(text)
     }
 
 }

@@ -4,6 +4,7 @@
     <attr name="label" format="string"/>
     <attr name="icon" format="reference"/>
     <attr name="hint" format="string"/>
+    <attr name="text" format="string"/>
 
     <attr name="inputType">
         <flag name="text" value="0x00000001" />
@@ -28,6 +29,7 @@
         <attr name="imeOptions"/>
         <attr name="inputType"/>
         <attr name="hint"/>
+        <attr name="text"/>
     </declare-styleable>
 
     <declare-styleable name="ViewCard">

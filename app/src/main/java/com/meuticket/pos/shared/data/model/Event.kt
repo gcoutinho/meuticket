@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Category(
+data class Event(
     @PrimaryKey val uid: Int,
     @ColumnInfo val name: String
-): java.io.Serializable
+)

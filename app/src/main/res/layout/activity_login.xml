@@ -31,6 +31,7 @@
             app:layout_constraintTop_toTopOf="@id/login_settings"
             android:layout_marginTop="@dimen/margin_medium2"
             app:label="Usuário"
+            app:text="admin"
             android:id="@+id/login_user"
             app:imeOptions="actionNext"/>
 
@@ -39,6 +40,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/login_user"
             app:label="Senha"
+            app:text="1234"
             android:id="@+id/login_password"
             android:layout_marginTop="@dimen/margin_medium2"
             app:imeOptions="actionGo"

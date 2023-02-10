@@ -1,10 +1,13 @@
 package com.meuticket.pos.ticket.presentation
 
+import androidx.lifecycle.viewModelScope
 import com.meuticket.pos.base.BaseViewModel
 import com.meuticket.pos.shared.data.model.Product
 import com.meuticket.pos.shared.domain.ProductsListInteractor
 import com.meuticket.pos.core.livedata.SingleLiveEvent
 import com.meuticket.pos.core.session.Cart
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 sealed class ProductListViewModelState {
@@ -12,6 +15,7 @@ sealed class ProductListViewModelState {
     class HideQuantityPicker(val product: Product): ProductListViewModelState()
     class TempCart(val quantity: Int, val value: Double): ProductListViewModelState()
     class CartUpdated(val value: Double): ProductListViewModelState()
+    object ProductsLoaded: ProductListViewModelState()
 }
 
 
@@ -22,10 +26,20 @@ class ProductListViewModel @Inject constructor(
 
     var state = SingleLiveEvent<ProductListViewModelState>()
 
-    var products: List<Product> = interactor.listProducts()
+    lateinit var products: List<Product>
 
     override fun onCreate() {
         super.onCreate()
+
+        viewModelScope.launch {
+            runOn(Dispatchers.IO) {
+                products = interactor.listProducts()
+            }.onSuccess {
+                state.value = ProductListViewModelState.ProductsLoaded
+            }.onFailure {
+                it.printStackTrace()
+            }
+        }
         state.value = ProductListViewModelState.CartUpdated(cart.products.sumOf { it.qtd*it.value })
     }
 

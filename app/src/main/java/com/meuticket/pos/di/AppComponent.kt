@@ -9,6 +9,7 @@ import com.meuticket.pos.register.di.RegisterModuleBuilder
 import com.meuticket.pos.login.di.LoginModuleBuilder
 import com.meuticket.pos.payment.di.PaymentModuleBuilder
 import com.meuticket.pos.shared.di.CategoryModule
+import com.meuticket.pos.shared.di.EventModule
 import com.meuticket.pos.shared.di.ProductsModule
 import com.meuticket.pos.shared.di.UsersModule
 import com.meuticket.pos.ticket.di.NewTicketModuleBuilder
@@ -35,7 +36,8 @@ import javax.inject.Singleton
 
         ProductsModule::class,
         UsersModule::class,
-        CategoryModule::class
+        CategoryModule::class,
+        EventModule::class
     ]
 )
 interface AppComponent : AndroidInjector<DaggerApplication> {

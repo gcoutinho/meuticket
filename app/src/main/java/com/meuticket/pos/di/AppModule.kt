@@ -7,8 +7,6 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.meuticket.pos.core.network.Api
 import com.meuticket.pos.core.storage.LocalStorage
 import com.meuticket.pos.core.storage.LocalStorageImpl
-import com.meuticket.pos.shared.data.ProductsRepository
-import com.meuticket.pos.shared.data.ProductsRepositoryImpl
 import com.squareup.moshi.Moshi
 import dagger.Binds
 import dagger.Module

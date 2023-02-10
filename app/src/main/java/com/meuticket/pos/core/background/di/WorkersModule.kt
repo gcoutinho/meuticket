@@ -1,11 +1,7 @@
 package com.meuticket.pos.core.background.di
 
 import androidx.work.ListenableWorker
-import com.meuticket.pos.core.background.AsyncWorker
-import com.meuticket.pos.core.background.AsyncWorkerImpl
-import com.meuticket.pos.core.background.IWorkerFactory
-import com.meuticket.pos.core.background.ProductWorker
-import com.meuticket.pos.core.background.UsersWorker
+import com.meuticket.pos.core.background.*
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -19,6 +15,11 @@ interface WorkersModule {
     @IntoMap
     @WorkerKey(ProductWorker::class)
     fun bindProductWorker(worker: ProductWorker.Factory): IWorkerFactory<out ListenableWorker>
+
+    @Binds
+    @IntoMap
+    @WorkerKey(CategoryWorker::class)
+    fun bindWorker(worker: CategoryWorker.Factory): IWorkerFactory<out ListenableWorker>
 
     @Binds
     @IntoMap

@@ -34,62 +34,44 @@ class ProductsRepositoryImpl @Inject constructor(
             return adapter.fromJson(
                 "[\n" +
                         "  {\n" +
-                        "    \"id\": \"1\",\n" +
+                        "    \"uid\": \"1\",\n" +
                         "    \"name\": \"Produto 1\",\n" +
-                        "    \"category\": {\n" +
-                        "      \"name\": \"Cat1\",\n" +
-                        "      \"id\": 1\n" +
-                        "    }," +
+                        "    \"category_uid\": 1," +
                         "    \"image\": \"https://www.imagensempng.com.br/wp-content/uploads/2022/01/2442.png\",\n" +
                         "    \"value\": 1\n" +
                         "  },\n" +
                         "  {\n" +
-                        "    \"id\": \"2\",\n" +
+                        "    \"uid\": \"2\",\n" +
                         "    \"name\": \"Produto 2\",\n" +
-                        "    \"category\": {\n" +
-                        "      \"name\": \"Cat1\",\n" +
-                        "      \"id\": 1\n" +
-                        "    }," +
+                        "    \"category_uid\": 1," +
                         "    \"image\": \"https://images.ctfassets.net/lcr8qbvxj7mh/3W2icVz4CWktIhfm5XRcYK/748774d37e23a5b9ba90cbf6f8d40734/BR_RBED_250_Single-Unit_close_cold_ORIGINAL_canwidth528px.png\",\n" +
                         "    \"value\": 1\n" +
                         "  },\n" +
                         "  {\n" +
-                        "    \"id\": \"3\",\n" +
+                        "    \"uid\": \"3\",\n" +
                         "    \"name\": \"Produto 3\",\n" +
-                        "    \"category\": {\n" +
-                        "      \"name\": \"Cat1\",\n" +
-                        "      \"id\": 1\n" +
-                        "    }," +
+                        "    \"category_uid\": 1," +
                         "    \"image\": \"https://www.imagensempng.com.br/wp-content/uploads/2022/01/2442.png\",\n" +
                         "    \"value\": 1\n" +
                         "  },\n" +
                         "  {\n" +
-                        "    \"id\": \"4\",\n" +
+                        "    \"uid\": \"4\",\n" +
                         "    \"name\": \"Produto 4\",\n" +
-                        "    \"category\": {\n" +
-                        "      \"name\": \"Cat1\",\n" +
-                        "      \"id\": 1\n" +
-                        "    }," +
+                        "    \"category_uid\": 1," +
                         "    \"image\": \"https://images.ctfassets.net/lcr8qbvxj7mh/3W2icVz4CWktIhfm5XRcYK/748774d37e23a5b9ba90cbf6f8d40734/BR_RBED_250_Single-Unit_close_cold_ORIGINAL_canwidth528px.png\",\n" +
                         "    \"value\": 1\n" +
                         "  },\n" +
                         "  {\n" +
-                        "    \"id\": \"5\",\n" +
+                        "    \"uid\": \"5\",\n" +
                         "    \"name\": \"Produto 5\",\n" +
-                        "    \"category\": {\n" +
-                        "      \"name\": \"Cat1\",\n" +
-                        "      \"id\": 1\n" +
-                        "    }," +
+                        "    \"category_uid\": 1," +
                         "    \"image\": \"https://www.imagensempng.com.br/wp-content/uploads/2022/01/2442.png\",\n" +
                         "    \"value\": 1\n" +
                         "  },\n" +
                         "  {\n" +
-                        "    \"id\": \"6\",\n" +
+                        "    \"uid\": \"6\",\n" +
                         "    \"name\": \"Produto 6\",\n" +
-                        "    \"category\": {\n" +
-                        "      \"name\": \"Cat1\",\n" +
-                        "      \"id\": 1\n" +
-                        "    }," +
+                        "    \"category_uid\": 1," +
                         "    \"image\": \"https://images.ctfassets.net/lcr8qbvxj7mh/3W2icVz4CWktIhfm5XRcYK/748774d37e23a5b9ba90cbf6f8d40734/BR_RBED_250_Single-Unit_close_cold_ORIGINAL_canwidth528px.png\",\n" +
                         "    \"value\": 1\n" +
                         "  }\n" +

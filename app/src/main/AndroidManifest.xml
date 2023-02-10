@@ -39,6 +39,8 @@
         <activity android:name=".register.users.presentation.UserFormActivity"/>
         <activity android:name=".register.category.presentation.CategoryRegisterActivity"/>
         <activity android:name=".register.category.presentation.CategoryFormActivity"/>
+        <activity android:name=".register.event.presentation.EventRegisterActivity"/>
+        <activity android:name=".register.event.presentation.EventFormActivity"/>
 
         <provider
             android:name="androidx.startup.InitializationProvider"
