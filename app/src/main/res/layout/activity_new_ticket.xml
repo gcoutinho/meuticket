@@ -25,11 +25,18 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/search"
+            android:id="@+id/category_list"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/new_ticket_footer"
-            app:layout_constraintTop_toBottomOf="@id/search"
+            app:layout_constraintTop_toBottomOf="@id/category_list"
             android:background="@drawable/list_bg"
             android:paddingTop="@dimen/padding_large"
+            android:layout_marginTop="@dimen/margin_medium2"
             android:id="@+id/products_list"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout

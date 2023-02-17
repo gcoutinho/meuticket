@@ -42,8 +42,8 @@ class ProductsRepositoryImpl @Inject constructor(
                         "  },\n" +
                         "  {\n" +
                         "    \"uid\": \"2\",\n" +
-                        "    \"name\": \"Produto 2\",\n" +
-                        "    \"category_uid\": 1," +
+                        "    \"name\": \"Produto 2 Lanche\",\n" +
+                        "    \"category_uid\": 2," +
                         "    \"image\": \"https://images.ctfassets.net/lcr8qbvxj7mh/3W2icVz4CWktIhfm5XRcYK/748774d37e23a5b9ba90cbf6f8d40734/BR_RBED_250_Single-Unit_close_cold_ORIGINAL_canwidth528px.png\",\n" +
                         "    \"value\": 1\n" +
                         "  },\n" +

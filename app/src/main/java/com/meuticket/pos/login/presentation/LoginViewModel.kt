@@ -20,10 +20,9 @@ class LoginViewModel @Inject constructor(
     fun doLogin(user: String, password: String) {
 
         runAsync(
-            block = {
+            {
                 interactor.doLogin(user, password)
-            },
-            onSuccess = { result ->
+            }, onSuccess = { result ->
                 if(result.isValid)
                     state.value = LoginViewModelState.LoginSuccess(result.user!!)
                 else

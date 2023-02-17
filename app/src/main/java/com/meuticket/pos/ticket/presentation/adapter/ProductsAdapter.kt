@@ -2,6 +2,7 @@ package com.meuticket.pos.ticket.presentation.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.meuticket.pos.shared.data.model.Category
 import com.meuticket.pos.shared.data.model.Product
 import com.meuticket.pos.ticket.presentation.ProductListViewModel
 import com.meuticket.pos.ui.components.ViewProductCell
@@ -54,7 +55,8 @@ class ProductsAdapter(val viewModel: ProductListViewModel): RecyclerView.Adapter
     }
 
     fun resetSelection() {
-        previousSelected.isSelected = false
+        if(::previousSelected.isInitialized)
+            previousSelected.isSelected = false
     }
 
     fun filter(text: String) {
@@ -62,6 +64,19 @@ class ProductsAdapter(val viewModel: ProductListViewModel): RecyclerView.Adapter
         resetSelection()
 
         localItems = viewModel.products.filter { it.name.contains(text) }.toMutableList()
+        notifyDataSetChanged()
+    }
+
+    fun filter(category: Category, isSelected: Boolean) {
+
+        resetSelection()
+
+        localItems =
+            if(isSelected)
+                viewModel.products.filter { it.category == category }.toMutableList()
+            else
+                viewModel.products.toMutableList()
+
         notifyDataSetChanged()
     }
 }

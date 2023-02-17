@@ -10,10 +10,10 @@ import kotlinx.coroutines.withContext
 open class BaseViewModel : ViewModel(), LifecycleObserver {
 
     inline fun <R, T> T.runAsync(
-        dispatcher: CoroutineDispatcher = Dispatchers.IO,
         noinline block: suspend T.() -> R,
         crossinline onSuccess: (R) -> Unit = {},
         crossinline onError: (ex: Throwable) -> Unit = {},
+        dispatcher: CoroutineDispatcher = Dispatchers.IO,
     ) {
         viewModelScope.launch {
             withContext(dispatcher) {

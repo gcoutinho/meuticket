@@ -6,13 +6,16 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.meuticket.pos.R
 import com.meuticket.pos.base.BaseMvvmActivity
 import com.meuticket.pos.base.viewBinding
 import com.meuticket.pos.core.livedata.SafeObserver
 import com.meuticket.pos.databinding.ActivityNewTicketBinding
 import com.meuticket.pos.payment.presentation.PaymentActivity
+import com.meuticket.pos.shared.data.model.Category
 import com.meuticket.pos.shared.data.model.Product
+import com.meuticket.pos.ticket.presentation.adapter.CategoriesAdapter
 import com.meuticket.pos.ticket.presentation.adapter.ProductsAdapter
 import com.meuticket.pos.ui.utils.animateClick
 import com.meuticket.pos.ui.utils.hide
@@ -58,6 +61,9 @@ class NewTicketActivity: BaseMvvmActivity() {
                  is ProductListViewModelState.CartUpdated -> {
                      cartUpdated(state.value)
                  }
+                 is ProductListViewModelState.CategoryClicked -> {
+                     doFilter(state.category, state.isSelected)
+                 }
              }
         })
     }
@@ -96,6 +102,9 @@ class NewTicketActivity: BaseMvvmActivity() {
     private fun loadItems() {
         binding.productsList.layoutManager = LinearLayoutManager(this)
         binding.productsList.adapter = ProductsAdapter(viewModel)
+
+        binding.categoryList.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        binding.categoryList.adapter = CategoriesAdapter(viewModel)
     }
 
     fun setupListeners() {
@@ -120,4 +129,10 @@ class NewTicketActivity: BaseMvvmActivity() {
         hideQuantityPicker()
         (binding.productsList.adapter as ProductsAdapter).filter(text)
     }
+
+    private fun doFilter(category: Category, isSelected: Boolean) {
+        hideQuantityPicker()
+        (binding.productsList.adapter as ProductsAdapter).filter(category, isSelected)
+    }
+
 }

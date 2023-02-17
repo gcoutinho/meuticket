@@ -1,12 +1,11 @@
 package com.meuticket.pos.ticket.presentation
 
-import androidx.lifecycle.viewModelScope
 import com.meuticket.pos.base.BaseViewModel
 import com.meuticket.pos.shared.data.model.Product
 import com.meuticket.pos.shared.domain.ProductsListInteractor
 import com.meuticket.pos.core.livedata.SingleLiveEvent
 import com.meuticket.pos.core.session.Cart
-import kotlinx.coroutines.launch
+import com.meuticket.pos.shared.data.model.Category
 import javax.inject.Inject
 
 sealed class ProductListViewModelState {
@@ -14,6 +13,8 @@ sealed class ProductListViewModelState {
     class HideQuantityPicker(val product: Product): ProductListViewModelState()
     class TempCart(val quantity: Int, val value: Double): ProductListViewModelState()
     class CartUpdated(val value: Double): ProductListViewModelState()
+    class CategoryClicked(val category: Category, val isSelected: Boolean) : ProductListViewModelState()
+
     object ProductsLoaded: ProductListViewModelState()
 }
 
@@ -30,11 +31,13 @@ class ProductListViewModel @Inject constructor(
     override fun onCreate() {
         super.onCreate()
 
-        runAsync(block = {
-            products = interactor.listProducts()
-        }, onSuccess = {
-            state.value = ProductListViewModelState.ProductsLoaded
-        })
+        runAsync(
+            {
+                products = interactor.listProducts()
+            },
+            onSuccess = {
+                state.value = ProductListViewModelState.ProductsLoaded
+            })
 
         state.value = ProductListViewModelState.CartUpdated(cart.products.sumOf { it.qtd*it.value })
     }
@@ -80,6 +83,10 @@ class ProductListViewModel @Inject constructor(
         state.value = ProductListViewModelState.CartUpdated(cart.products.sumOf { it.qtd*it.value })
         state.value = ProductListViewModelState.TempCart(0, 0.0)
         state.value = ProductListViewModelState.HideQuantityPicker(product)
+    }
+
+    fun filter(category: Category, isSelected: Boolean) {
+        state.value = ProductListViewModelState.CategoryClicked(category, isSelected)
     }
 
 }

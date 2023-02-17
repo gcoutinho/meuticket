@@ -25,7 +25,7 @@ class ProductsRegisterViewModel @Inject constructor(
         super.onCreate()
 
         runAsync(
-            block = {
+            {
                 products = interactor.listProducts()
             }, onSuccess = {
                 state.value = ProductsRegisterViewModelState.ProductsLoaded
