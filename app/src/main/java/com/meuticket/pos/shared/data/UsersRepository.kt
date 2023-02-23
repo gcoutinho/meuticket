@@ -7,6 +7,8 @@ import javax.inject.Inject
 interface UsersRepository {
     fun listUsersFromRemote(): List<User>
     fun listUsersFromLocal(): List<User>
+    fun saveOrUpdate(user: User?, username: String, password: String, admin: Boolean)
+    fun deleteUser(user: User)
 }
 
 class UsersRepositoryImpl @Inject constructor(
@@ -25,5 +27,17 @@ class UsersRepositoryImpl @Inject constructor(
 
     override fun listUsersFromLocal(): List<User> {
         return localStorage.getUsers()
+    }
+
+    override fun saveOrUpdate(user: User?, username: String, password: String, admin: Boolean) {
+        if(user == null) {
+            localStorage.saveUser(username, password, admin)
+        } else {
+            localStorage.updateUser(user.uid, username, password, admin)
+        }
+    }
+
+    override fun deleteUser(user: User) {
+        localStorage.deleteUser(user)
     }
 }

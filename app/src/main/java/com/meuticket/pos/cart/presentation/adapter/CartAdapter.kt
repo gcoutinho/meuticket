@@ -1,22 +1,17 @@
-package com.meuticket.pos.register.products.presentation.adapter
+package com.meuticket.pos.cart.presentation.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.meuticket.pos.cart.presentation.adapter.ProductsViewHolder
-import com.meuticket.pos.register.products.presentation.ProductsRegisterViewModel
+import com.meuticket.pos.cart.presentation.CartViewModel
 import com.meuticket.pos.shared.data.model.Product
 import com.meuticket.pos.ui.components.ViewRegisterCell
 import com.meuticket.pos.utils.toFormattedCurrency
 import java.math.BigDecimal
 import java.util.*
 
-class ProductsRegisterAdapter(val viewModel: ProductsRegisterViewModel): RecyclerView.Adapter<ProductsViewHolder>() {
+class CartAdapter(val viewModel: CartViewModel): RecyclerView.Adapter<ProductsViewHolder>() {
 
-    var localItems: MutableList<Product>
-
-    init {
-        localItems = viewModel.products.toMutableList()
-    }
+    var localItems: MutableList<Product> = viewModel.cart.products.toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsViewHolder {
         return ProductsViewHolder(ViewRegisterCell(parent.context).apply {
@@ -32,7 +27,7 @@ class ProductsRegisterAdapter(val viewModel: ProductsRegisterViewModel): Recycle
         holder.cellView.apply {
             title = product.name
             image = product.image
-            subtitle = BigDecimal(product.value).toFormattedCurrency(locale = Locale.getDefault())
+            subtitle = "${product.qtd} x ${BigDecimal(product.value).toFormattedCurrency(locale = Locale.getDefault())}"
 
             setEditClickListener {
                 viewModel.editClicked(product)
@@ -46,12 +41,6 @@ class ProductsRegisterAdapter(val viewModel: ProductsRegisterViewModel): Recycle
 
     override fun getItemCount(): Int {
         return localItems.size
-    }
-
-    fun filter(text: String) {
-
-        localItems = viewModel.products.filter { it.name.contains(text) }.toMutableList()
-        notifyDataSetChanged()
     }
 }
 

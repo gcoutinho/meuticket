@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class User(
-    @PrimaryKey val uid: Int,
+    @PrimaryKey(autoGenerate = true) val uid: Int = 0,
     @ColumnInfo val name: String,
     @ColumnInfo val password: String,
     @ColumnInfo val admin: Boolean
-)
+): java.io.Serializable

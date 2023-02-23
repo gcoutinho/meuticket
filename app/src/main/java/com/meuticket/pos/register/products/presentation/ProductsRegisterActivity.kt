@@ -1,6 +1,5 @@
 package com.meuticket.pos.register.products.presentation
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText

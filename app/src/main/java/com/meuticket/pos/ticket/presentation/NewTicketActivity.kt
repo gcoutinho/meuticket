@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.meuticket.pos.R
 import com.meuticket.pos.base.BaseMvvmActivity
 import com.meuticket.pos.base.viewBinding
+import com.meuticket.pos.cart.presentation.CartActivity
 import com.meuticket.pos.core.livedata.SafeObserver
 import com.meuticket.pos.databinding.ActivityNewTicketBinding
 import com.meuticket.pos.payment.presentation.PaymentActivity
@@ -122,6 +123,9 @@ class NewTicketActivity: BaseMvvmActivity() {
         }
         binding.pay.setOnClickListener {
             startActivity(Intent(this, PaymentActivity::class.java))
+        }
+        binding.cart.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
         }
     }
 

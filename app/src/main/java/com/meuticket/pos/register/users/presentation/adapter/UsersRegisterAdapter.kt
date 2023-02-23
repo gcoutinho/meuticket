@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.meuticket.pos.register.users.presentation.UsersRegisterViewModel
 import com.meuticket.pos.shared.data.model.User
 import com.meuticket.pos.ui.components.ViewRegisterCell
+import com.meuticket.pos.ui.utils.hide
 
 class UsersRegisterAdapter(val viewModel: UsersRegisterViewModel): RecyclerView.Adapter<UsersViewHolder>() {
 
@@ -29,12 +30,17 @@ class UsersRegisterAdapter(val viewModel: UsersRegisterViewModel): RecyclerView.
             title = user.name
             subtitle = "Tipo: ${if(user.admin) "Admin" else "Normal"}"
 
-            setEditClickListener {
-                viewModel.editClicked(user)
-            }
+            if(viewModel.canEdit()) {
+                setEditClickListener {
+                    viewModel.editClicked(user)
+                }
 
-            setDeleteClickListener {
-                viewModel.deleteClicked(user)
+                setDeleteClickListener {
+                    viewModel.deleteClicked(user)
+                }
+            } else {
+                binding.edit.hide()
+                binding.delete.hide()
             }
         }
     }

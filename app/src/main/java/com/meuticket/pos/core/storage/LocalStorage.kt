@@ -16,9 +16,6 @@ interface LocalStorage {
     fun saveOrder()
     fun getOrder()
 
-    fun saveProduct()
-    fun getProduct()
-
     fun getProducts(): List<Product>
     fun saveProducts(products: List<Product>)
     fun getUsers(): List<User>
@@ -27,6 +24,9 @@ interface LocalStorage {
     fun findUser(user: String, password: String): User?
     fun getEvents(): List<Event>
     fun saveCategories(data: List<Category>)
+    fun saveUser(username: String, password: String, admin: Boolean)
+    fun updateUser(uid: Int, username: String, password: String, admin: Boolean)
+    fun deleteUser(user: User)
 }
 
 class LocalStorageImpl @Inject constructor(
@@ -40,14 +40,6 @@ class LocalStorageImpl @Inject constructor(
     }
 
     override fun getOrder() {
-        TODO("Not yet implemented")
-    }
-
-    override fun saveProduct() {
-        TODO("Not yet implemented")
-    }
-
-    override fun getProduct() {
         TODO("Not yet implemented")
     }
 
@@ -75,6 +67,18 @@ class LocalStorageImpl @Inject constructor(
             Log.e("DB", ex.message?:ex.stackTraceToString())
             emptyList()
         }
+    }
+
+    override fun saveUser(username: String, password: String, admin: Boolean) {
+        userDao.insert(User(name = username, password = password, admin = admin))
+    }
+
+    override fun updateUser(uid: Int, username: String, password: String, admin: Boolean) {
+        userDao.update(User(uid, username, password, admin))
+    }
+
+    override fun deleteUser(user: User) {
+        userDao.delete(user)
     }
 
     override fun saveUsers(data: List<User>) {

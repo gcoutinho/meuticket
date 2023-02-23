@@ -22,4 +22,8 @@ interface UserDao {
 
     @Query("SELECT * FROM user WHERE name LIKE :user and password LIKE :password LIMIT 1")
     fun findByNamePassword(user: String, password: String): User?
+    @Insert
+    fun insert(user: User)
+    @Update
+    fun update(user: User)
 }

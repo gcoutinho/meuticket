@@ -5,6 +5,6 @@
     <color name="secondary">#F56E0C</color>
     <color name="dark_pure">#FF000000</color>
     <color name="light_pure">#ffffff</color>
-    <color name="light_1">#EEEEEE</color>
-    <color name="light_2">#CCCCCC</color>
+    <color name="light_1">#F5F5F5</color>
+    <color name="light_2">#E5E5E5</color>
 </resources>

@@ -13,31 +13,15 @@
             style="@style/ToolbarStyle"
             android:id="@+id/toolbar"/>
 
-        <com.meuticket.pos.ui.components.ViewInput
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_medium2"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
-            android:id="@+id/search"
-            app:drawableEnd="@drawable/ic_lupa"
-            app:imeOptions="actionSearch"
-            app:hint="Digite o código ou nome do produto"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/search"
-            android:id="@+id/category_list"/>
-
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/new_ticket_footer"
-            app:layout_constraintTop_toBottomOf="@id/category_list"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
             android:background="@drawable/list_bg"
             android:paddingTop="@dimen/padding_large"
             android:layout_marginTop="@dimen/margin_medium2"
-            android:id="@+id/products_list"/>
+            android:id="@+id/cart_list"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -51,19 +35,9 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:background="@color/light_pure"
-                android:id="@+id/new_ticket_pay_footer"
+                android:id="@+id/cart_pay_footer"
                 android:padding="@dimen/padding_medium2"
                 android:gravity="center">
-
-                <com.meuticket.pos.ui.components.ViewButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/go_to_cart"
-                    android:id="@+id/cart"
-                    style="@style/SecondaryButton.SM"
-                    android:drawableStart="@drawable/ic_cart"
-                    android:drawablePadding="@dimen/padding_medium"
-                    android:layout_marginEnd="@dimen/margin_medium2"/>
 
                 <com.meuticket.pos.ui.components.ViewButton
                     android:layout_width="wrap_content"
@@ -80,7 +54,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:background="@color/light_pure"
-                android:id="@+id/new_ticket_qtd_footer"
+                android:id="@+id/cart_qtd_footer"
                 android:padding="@dimen/padding_medium2"
                 android:gravity="center"
                 android:visibility="gone">
@@ -111,7 +85,7 @@
                 <com.meuticket.pos.ui.components.ViewButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Adicionar R$ 0,00"
+                    android:text="Atualizar R$ 0,00"
                     android:id="@+id/addToCart"
                     style="@style/HighlightButton.SM"
                     android:layout_marginStart="@dimen/margin_large"/>
