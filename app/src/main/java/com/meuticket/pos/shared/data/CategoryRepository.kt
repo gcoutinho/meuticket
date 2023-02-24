@@ -7,6 +7,8 @@ import javax.inject.Inject
 interface CategoryRepository {
     suspend fun listFromRemote(): List<Category>
     suspend fun listFromLocal(): List<Category>
+    suspend fun delete(category: Category)
+    fun save(category: Category)
 }
 
 class CategoryRepositoryImpl @Inject constructor(
@@ -28,5 +30,13 @@ class CategoryRepositoryImpl @Inject constructor(
 
     override suspend fun listFromLocal(): List<Category> {
         return localStorage.getCategories()
+    }
+
+    override suspend fun delete(category: Category) {
+        localStorage.deleteCategory(category)
+    }
+
+    override fun save(category: Category) {
+        localStorage.saveCategory(category)
     }
 }

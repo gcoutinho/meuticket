@@ -1,12 +1,10 @@
 package com.meuticket.pos.register.products.presentation
 
-import androidx.lifecycle.viewModelScope
 import com.meuticket.pos.base.BaseViewModel
 import com.meuticket.pos.core.livedata.SingleLiveEvent
 import com.meuticket.pos.core.session.Cart
 import com.meuticket.pos.shared.data.model.Product
 import com.meuticket.pos.shared.domain.ProductsListInteractor
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 sealed class ProductsRegisterViewModelState {

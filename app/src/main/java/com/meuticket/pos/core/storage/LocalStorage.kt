@@ -30,6 +30,8 @@ interface LocalStorage {
     fun updateProduct(product: Product)
     fun insertProduct(product: Product)
     fun deleteProduct(product: Product)
+    fun deleteCategory(category: Category)
+    fun saveCategory(category: Category)
 }
 
 class LocalStorageImpl @Inject constructor(
@@ -94,6 +96,14 @@ class LocalStorageImpl @Inject constructor(
 
     override fun deleteProduct(product: Product) {
         productDao.delete(product)
+    }
+
+    override fun deleteCategory(category: Category) {
+        categoryDao.delete(category)
+    }
+
+    override fun saveCategory(category: Category) {
+        categoryDao.save(category)
     }
 
     override fun saveUsers(data: List<User>) {

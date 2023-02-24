@@ -23,4 +23,6 @@ interface CategoryDao {
 
     @Delete
     fun delete(category: Category)
+    @Insert(onConflict = REPLACE)
+    fun save(category: Category)
 }

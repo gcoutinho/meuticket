@@ -11,7 +11,7 @@ class CategoryRegisterAdapter(val viewModel: CategoryRegisterViewModel): Recycle
     var localItems: MutableList<Category>
 
     init {
-        localItems = viewModel.category.toMutableList()
+        localItems = viewModel.categories.toMutableList()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -44,7 +44,7 @@ class CategoryRegisterAdapter(val viewModel: CategoryRegisterViewModel): Recycle
 
     fun filter(text: String) {
 
-        localItems = viewModel.category.filter { it.name.contains(text) }.toMutableList()
+        localItems = viewModel.categories.filter { it.name.contains(text) }.toMutableList()
         notifyDataSetChanged()
     }
 }

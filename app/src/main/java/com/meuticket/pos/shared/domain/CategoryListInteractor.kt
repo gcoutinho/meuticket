@@ -6,6 +6,8 @@ import javax.inject.Inject
 
 interface CategoryListInteractor {
     suspend fun listCategories(): List<Category>
+    suspend fun delete(category: Category)
+    suspend fun save(category: Category?, name: String)
 }
 
 class CategoryListInteractorImpl @Inject constructor(
@@ -14,6 +16,14 @@ class CategoryListInteractorImpl @Inject constructor(
 
     override suspend fun listCategories(): List<Category> {
         return repository.listFromLocal()
+    }
+
+    override suspend fun delete(category: Category) {
+        repository.delete(category)
+    }
+
+    override suspend fun save(category: Category?, name: String) {
+        repository.save(Category(category?.uid?:0, name))
     }
 
 }

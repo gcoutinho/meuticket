@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.meuticket.pos.R
@@ -12,6 +13,7 @@ import com.meuticket.pos.base.viewBinding
 import com.meuticket.pos.core.livedata.SafeObserver
 import com.meuticket.pos.databinding.ActivityRegisterCategoryBinding
 import com.meuticket.pos.register.category.presentation.adapter.CategoryRegisterAdapter
+import com.meuticket.pos.ui.components.ViewDialog
 import com.meuticket.pos.ui.utils.hideKeyboard
 
 class CategoryRegisterActivity: BaseMvvmActivity() {
@@ -33,13 +35,57 @@ class CategoryRegisterActivity: BaseMvvmActivity() {
         viewModel.state.observe(this, SafeObserver { state ->
             when(state) {
                 is CategoryRegisterViewModelState.ConfirmDelete -> {
-
+                    showDeleteDialog(state.action)
                 }
                 is CategoryRegisterViewModelState.OpenEditScreen -> {
-                    startActivity(Intent(this, CategoryFormActivity::class.java))
+                    formIntent.launch(CategoryFormActivity.newIntent(this, state.category))
+                }
+                CategoryRegisterViewModelState.ShowErrorCategoryInCart -> {
+                    showCategoryInCartError()
+                }
+                CategoryRegisterViewModelState.CategoriesLoaded -> {
+                    loadItems()
                 }
             }
         })
+    }
+
+
+    val formIntent = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if(it.resultCode == RESULT_OK)
+            viewModel.loadItems()
+    }
+
+    private fun showDeleteDialog(action: () -> Unit) {
+        val dialog = ViewDialog()
+        dialog.showNow(supportFragmentManager, "DIALOG")
+
+        dialog.apply {
+            title = "Atenção"
+            description = "Deseja excluir o registro?"
+            primaryButtonText = "Sim"
+            setPrimaryButtonListener {
+                action.invoke()
+                dismissAllowingStateLoss()
+            }
+            secondaryButtonText = "Não"
+            setSecondaryButtonListener {
+                dismissAllowingStateLoss()
+            }
+        }
+    }
+    private fun showCategoryInCartError() {
+        ViewDialog().apply {
+            showNow(supportFragmentManager, "DIALOG")
+            title = "Atenção"
+            description = "Esta categoria está no carrinho, remova-a antes de fazer essa operação"
+            primaryButtonText = "OK"
+            setPrimaryButtonListener {
+                dismissAllowingStateLoss()
+            }
+        }
     }
 
     private fun setupListener() {
