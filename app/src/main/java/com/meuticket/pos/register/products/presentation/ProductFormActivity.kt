@@ -1,14 +1,21 @@
 package com.meuticket.pos.register.products.presentation
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View.OnClickListener
+import android.widget.ScrollView
+import androidx.appcompat.widget.LinearLayoutCompat
 import com.meuticket.pos.base.BaseMvvmActivity
 import com.meuticket.pos.base.viewBinding
 import com.meuticket.pos.core.livedata.SafeObserver
 import com.meuticket.pos.databinding.ActivityProductFormBinding
+import com.meuticket.pos.databinding.ViewDialogSelectorItemBinding
 import com.meuticket.pos.shared.data.model.Category
 import com.meuticket.pos.shared.data.model.Product
+import com.meuticket.pos.ui.components.ViewDialog
 import com.meuticket.pos.utils.MoneyWatcher
 import com.meuticket.pos.utils.toFormattedCurrency
 import java.math.BigDecimal
@@ -29,6 +36,9 @@ class ProductFormActivity: BaseMvvmActivity() {
 
         product = intent.getSerializableExtra(PRODUCT_EXTRA) as Product?
 
+        if(product != null)
+            binding.submit.text = "Atualizar"
+
         setupListeners()
         setupView()
         setupObservers()
@@ -40,15 +50,47 @@ class ProductFormActivity: BaseMvvmActivity() {
                 is ProductFormViewModelState.ShowCategoriesSelector -> {
                     showCategoriesSelector(state.categories)
                 }
+                is ProductFormViewModelState.Error -> {
+                    showErrorDialog(state.message)
+                }
+                ProductFormViewModelState.SavedSuccess -> {
+                    showSuccessDialog()
+                }
             }
         })
+    }
+
+    private fun showSuccessDialog() {
+        ViewDialog().apply {
+            showNow(supportFragmentManager, "DIALOG")
+            title = "Sucesso"
+            description = "Dados salvos com sucesso!"
+            primaryButtonText = "OK"
+            setPrimaryButtonListener {
+                dismissAllowingStateLoss()
+                setResult(RESULT_OK)
+                finish()
+            }
+        }
+    }
+
+    private fun showErrorDialog(message: String) {
+        ViewDialog().apply {
+            showNow(supportFragmentManager, "DIALOG")
+            title = "Atenção"
+            description = message
+            primaryButtonText = "OK"
+            setPrimaryButtonListener {
+                dismissAllowingStateLoss()
+            }
+        }
     }
 
     private fun setupView() {
         binding.name.text = product?.name?:""
         binding.value.text = BigDecimal(product?.value?:0.0).toFormattedCurrency(locale = Locale.getDefault())
         binding.category.text = product?.category?.name?:""
-        binding.print2ndWay.isChecked = product?.secondWay?:false
+        binding.printReceipt.isChecked = product?.printReceipt?:false
     }
 
     private fun setupListeners() {
@@ -57,16 +99,44 @@ class ProductFormActivity: BaseMvvmActivity() {
             binding.inputEditText.isFocusableInTouchMode = false
             binding.inputEditText.isFocusable = false
 
-            setOnClickListener {
+            val onClick = OnClickListener {
                 viewModel.categoryClicked()
             }
+
+            binding.inputEditText.setOnClickListener(onClick)
+            setOnClickListener(onClick)
         }
 
         binding.value.addTextWatcher(MoneyWatcher(binding.value.editText))
+        
+        binding.submit.setOnClickListener { 
+            viewModel.save(product, binding.name.text, binding.value.text, binding.category.text, binding.printReceipt.isChecked)
+        }
     }
 
     private fun showCategoriesSelector(categories: List<Category>) {
+        AlertDialog.Builder(this).apply {
+            var dialog: AlertDialog? = null
 
+            setView(ScrollView(this@ProductFormActivity).apply {
+                addView(LinearLayoutCompat(this@ProductFormActivity).apply {
+                    orientation = LinearLayoutCompat.VERTICAL
+                    categories.forEach {category ->
+                        addView(ViewDialogSelectorItemBinding.inflate(LayoutInflater.from(context)).apply {
+                            title.text = category.name
+                            
+                            setOnClickListener {
+                                viewModel.categorySelected(category)
+                                binding.category.text = category.name
+                                dialog?.dismiss()
+                            }
+                        }.root)
+                    }
+                })
+            })
+            dialog = create()
+            dialog.show()
+        }
     }
 
     companion object {

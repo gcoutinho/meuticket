@@ -17,6 +17,17 @@ class EventRegisterViewModel @Inject constructor(
 
     val state = SingleLiveEvent<EventRegisterViewModelState>()
 
+    lateinit var event: List<Event>
+
+    override fun onCreate() {
+        super.onCreate()
+        runAsync({
+            interactor.listEvents()
+        }, onSuccess = {
+            event = it
+        })
+    }
+
     fun editClicked(event: Event) {
         state.value = EventRegisterViewModelState.OpenEditScreen(event)
     }
@@ -25,5 +36,4 @@ class EventRegisterViewModel @Inject constructor(
         state.value = EventRegisterViewModelState.ConfirmDelete(event)
     }
 
-    var event: List<Event> = interactor.listEvents()
 }

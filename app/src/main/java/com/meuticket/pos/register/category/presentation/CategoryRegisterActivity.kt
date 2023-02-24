@@ -25,8 +25,6 @@ class CategoryRegisterActivity: BaseMvvmActivity() {
 
         setContentView(binding.root)
 
-        loadItems()
-
         setupListener()
         setupObservers()
     }

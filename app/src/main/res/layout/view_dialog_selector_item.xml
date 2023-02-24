@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/light_pure">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="@dimen/padding_medium3"
+        android:gravity="center_vertical"
+        android:text="Title"
+        android:textSize="@dimen/font_size_large"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

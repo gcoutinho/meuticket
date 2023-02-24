@@ -3,6 +3,7 @@ package com.meuticket.pos.register.products.presentation
 import androidx.lifecycle.viewModelScope
 import com.meuticket.pos.base.BaseViewModel
 import com.meuticket.pos.core.livedata.SingleLiveEvent
+import com.meuticket.pos.core.session.Cart
 import com.meuticket.pos.shared.data.model.Product
 import com.meuticket.pos.shared.domain.ProductsListInteractor
 import kotlinx.coroutines.launch
@@ -10,11 +11,13 @@ import javax.inject.Inject
 
 sealed class ProductsRegisterViewModelState {
     class OpenEditScreen(val product: Product): ProductsRegisterViewModelState()
-    class ConfirmDelete(val product: Product): ProductsRegisterViewModelState()
+    class ConfirmDelete(val product: Product, val action: () -> Unit): ProductsRegisterViewModelState()
     object ProductsLoaded: ProductsRegisterViewModelState()
+    object ProductInCartError: ProductsRegisterViewModelState()
 }
 
 class ProductsRegisterViewModel @Inject constructor(
+    val cart: Cart,
     val interactor: ProductsListInteractor
 ): BaseViewModel() {
 
@@ -24,6 +27,33 @@ class ProductsRegisterViewModel @Inject constructor(
     override fun onCreate() {
         super.onCreate()
 
+        loadItems()
+    }
+
+    fun editClicked(product: Product) {
+        if(cart.products.contains(product)) {
+            state.value = ProductsRegisterViewModelState.ProductInCartError
+            return
+        }
+        state.value = ProductsRegisterViewModelState.OpenEditScreen(product)
+    }
+
+    fun deleteClicked(product: Product) {
+        if(cart.products.contains(product)) {
+            state.value = ProductsRegisterViewModelState.ProductInCartError
+            return
+        }
+
+        state.value = ProductsRegisterViewModelState.ConfirmDelete(product) {
+            runAsync({
+                interactor.delete(product)
+            }, onSuccess = {
+                loadItems()
+            })
+        }
+    }
+
+    fun loadItems() {
         runAsync(
             {
                 products = interactor.listProducts()
@@ -31,14 +61,6 @@ class ProductsRegisterViewModel @Inject constructor(
                 state.value = ProductsRegisterViewModelState.ProductsLoaded
             }
         )
-    }
-
-    fun editClicked(product: Product) {
-        state.value = ProductsRegisterViewModelState.OpenEditScreen(product)
-    }
-
-    fun deleteClicked(product: Product) {
-        state.value = ProductsRegisterViewModelState.ConfirmDelete(product)
     }
 
 }

@@ -5,24 +5,24 @@ import com.meuticket.pos.shared.data.model.User
 import javax.inject.Inject
 
 interface UsersListInteractor {
-    fun listUsers(): List<User>
-    fun saveOrUpdate(user: User?, username: String, password: String, admin: Boolean)
-    fun delete(user: User)
+    suspend fun listUsers(): List<User>
+    suspend fun insertOrUpdate(user: User?, username: String, password: String, admin: Boolean)
+    suspend fun delete(user: User)
 }
 
 class UsersListInteractorImpl @Inject constructor(
     val repository: UsersRepository
 ): UsersListInteractor {
 
-    override fun listUsers(): List<User> {
+    override suspend fun listUsers(): List<User> {
         return repository.listUsersFromLocal()
     }
 
-    override fun saveOrUpdate(user: User?, username: String, password: String, admin: Boolean) {
-        repository.saveOrUpdate(user, username, password, admin)
+    override suspend fun insertOrUpdate(user: User?, username: String, password: String, admin: Boolean) {
+        repository.insertOrUpdate(user, username, password, admin)
     }
 
-    override fun delete(user: User) {
+    override suspend fun delete(user: User) {
         repository.deleteUser(user)
     }
 

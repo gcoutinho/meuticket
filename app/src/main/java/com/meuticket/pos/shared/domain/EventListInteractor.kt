@@ -5,14 +5,14 @@ import com.meuticket.pos.shared.data.model.Event
 import javax.inject.Inject
 
 interface EventListInteractor {
-    fun listEvents(): List<Event>
+    suspend fun listEvents(): List<Event>
 }
 
 class EventListInteractorImpl @Inject constructor(
     val repository: EventRepository
 ): EventListInteractor {
 
-    override fun listEvents(): List<Event> {
+    override suspend fun listEvents(): List<Event> {
         return repository.listFromLocal()
     }
 

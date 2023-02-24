@@ -16,14 +16,14 @@ class UserFormViewModel @Inject constructor(
 ): BaseViewModel() {
 
     val state = SingleLiveEvent<UserFormViewModelState>()
-    fun saveOrUpdate(user: User?, username: String, password: String, isAdmin: Boolean) {
+    fun insertOrUpdate(user: User?, username: String, password: String, isAdmin: Boolean) {
 
         if(username.length < 3 || password.length < 4) {
             state.value = UserFormViewModelState.InputError(message = "Usuário deve conter mais de 3 caracteres\nSenha deve conter mais de 4 caracteres")
         } else {
             runAsync(
                 {
-                    interactor.saveOrUpdate(user, username, password, isAdmin)
+                    interactor.insertOrUpdate(user, username, password, isAdmin)
                 }, onSuccess = {
                     state.value = UserFormViewModelState.SavedSuccess
                 }

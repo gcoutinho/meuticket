@@ -9,19 +9,34 @@ import java.lang.reflect.Type
 import javax.inject.Inject
 
 interface ProductsRepository {
-    fun listProductsFromRemote(): List<Product>
-    fun listProductsFromLocal(): List<Product>
+    suspend fun listProductsFromRemote(): List<Product>
+    suspend fun listProductsFromLocal(): List<Product>
+    suspend fun update(product: Product)
+    suspend fun insert(product: Product)
+    suspend fun delete(product: Product)
 }
 
 class ProductsRepositoryImpl @Inject constructor(
     val localStorage: LocalStorage,
 ): ProductsRepository {
 
-    override fun listProductsFromLocal(): List<Product> {
+    override suspend fun listProductsFromLocal(): List<Product> {
         return localStorage.getProducts()
     }
 
-    override fun listProductsFromRemote(): List<Product> {
+    override suspend fun update(product: Product) {
+        localStorage.updateProduct(product)
+    }
+
+    override suspend fun insert(product: Product) {
+        localStorage.insertProduct(product)
+    }
+
+    override suspend fun delete(product: Product) {
+        localStorage.deleteProduct(product)
+    }
+
+    override suspend fun listProductsFromRemote(): List<Product> {
 
         if(true) {
             val listType: Type = Types.newParameterizedType(

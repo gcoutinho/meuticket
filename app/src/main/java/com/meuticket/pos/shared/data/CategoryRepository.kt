@@ -5,15 +5,15 @@ import com.meuticket.pos.shared.data.model.Category
 import javax.inject.Inject
 
 interface CategoryRepository {
-    fun listFromRemote(): List<Category>
-    fun listFromLocal(): List<Category>
+    suspend fun listFromRemote(): List<Category>
+    suspend fun listFromLocal(): List<Category>
 }
 
 class CategoryRepositoryImpl @Inject constructor(
     val localStorage: LocalStorage,
     ): CategoryRepository {
 
-    override fun listFromRemote(): List<Category> {
+    override suspend fun listFromRemote(): List<Category> {
         return mutableListOf(
             Category(
                 1,
@@ -26,7 +26,7 @@ class CategoryRepositoryImpl @Inject constructor(
         )
     }
 
-    override fun listFromLocal(): List<Category> {
+    override suspend fun listFromLocal(): List<Category> {
         return localStorage.getCategories()
     }
 }

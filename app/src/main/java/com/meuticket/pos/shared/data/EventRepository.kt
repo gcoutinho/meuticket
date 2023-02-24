@@ -5,15 +5,15 @@ import com.meuticket.pos.shared.data.model.Event
 import javax.inject.Inject
 
 interface EventRepository {
-    fun listFromRemote(): List<Event>
-    fun listFromLocal(): List<Event>
+    suspend fun listFromRemote(): List<Event>
+    suspend fun listFromLocal(): List<Event>
 }
 
 class EventRepositoryImpl @Inject constructor(
     val localStorage: LocalStorage,
     ): EventRepository {
 
-    override fun listFromRemote(): List<Event> {
+    override suspend fun listFromRemote(): List<Event> {
         return mutableListOf(
             Event(
                 1,
@@ -26,7 +26,7 @@ class EventRepositoryImpl @Inject constructor(
         )
     }
 
-    override fun listFromLocal(): List<Event> {
+    override suspend fun listFromLocal(): List<Event> {
         return localStorage.getEvents()
     }
 }

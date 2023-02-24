@@ -5,16 +5,16 @@ import com.meuticket.pos.shared.data.model.User
 import javax.inject.Inject
 
 interface UsersRepository {
-    fun listUsersFromRemote(): List<User>
-    fun listUsersFromLocal(): List<User>
-    fun saveOrUpdate(user: User?, username: String, password: String, admin: Boolean)
-    fun deleteUser(user: User)
+    suspend fun listUsersFromRemote(): List<User>
+    suspend fun listUsersFromLocal(): List<User>
+    suspend fun insertOrUpdate(user: User?, username: String, password: String, admin: Boolean)
+    suspend fun deleteUser(user: User)
 }
 
 class UsersRepositoryImpl @Inject constructor(
     val localStorage: LocalStorage,
     ): UsersRepository {
-    override fun listUsersFromRemote(): List<User> {
+    override suspend fun listUsersFromRemote(): List<User> {
         return mutableListOf(
             User(
                 uid = 1, "admin", "1234", true
@@ -25,11 +25,11 @@ class UsersRepositoryImpl @Inject constructor(
         )
     }
 
-    override fun listUsersFromLocal(): List<User> {
+    override suspend fun listUsersFromLocal(): List<User> {
         return localStorage.getUsers()
     }
 
-    override fun saveOrUpdate(user: User?, username: String, password: String, admin: Boolean) {
+    override suspend fun insertOrUpdate(user: User?, username: String, password: String, admin: Boolean) {
         if(user == null) {
             localStorage.saveUser(username, password, admin)
         } else {
@@ -37,7 +37,7 @@ class UsersRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun deleteUser(user: User) {
+    override suspend fun deleteUser(user: User) {
         localStorage.deleteUser(user)
     }
 }

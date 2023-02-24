@@ -26,6 +26,9 @@ class UserFormActivity: BaseMvvmActivity() {
 
         user = intent.getSerializableExtra(USER_EXTRA) as User?
 
+        if(user != null)
+            binding.submit.text = "Atualizar"
+
         setupListeners()
         setupObservers()
     }
@@ -50,7 +53,7 @@ class UserFormActivity: BaseMvvmActivity() {
         dialog.apply {
             title = "Sucesso"
             description = "Dados salvos com sucesso!"
-            primaryButtonText = "Entendi"
+            primaryButtonText = "OK"
             setPrimaryButtonListener {
                 dismissAllowingStateLoss()
                 setResult(RESULT_OK)
@@ -82,7 +85,7 @@ class UserFormActivity: BaseMvvmActivity() {
         }
 
         binding.submit.setOnClickListener {
-            viewModel.saveOrUpdate(user, binding.name.text, binding.password.text, binding.isAdmin.isChecked)
+            viewModel.insertOrUpdate(user, binding.name.text, binding.password.text, binding.isAdmin.isChecked)
         }
     }
 

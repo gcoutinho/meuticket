@@ -60,11 +60,11 @@ class CartViewModel @Inject constructor(
     }
 
     fun addOne(actual: String, product: Product) {
-        state.value = CartViewModelState.TempCart(actual.toInt()+1, product.value*actual.toInt()+1)
+        state.value = CartViewModelState.TempCart(actual.toInt()+1, product.value*(actual.toInt()+1))
     }
 
     fun removeOne(actual: String, product: Product) {
         if(actual.toInt() > 1)
-            state.value = CartViewModelState.TempCart(actual.toInt()-1, product.value*actual.toInt()-1)
+            state.value = CartViewModelState.TempCart(actual.toInt()-1, product.value*(actual.toInt()-1))
     }
 }

@@ -54,7 +54,7 @@ class ProductListViewModel @Inject constructor(
         state.value.let {
             if(it is ProductListViewModelState.TempCart) {
                 if(it.quantity > 0) {
-                    state.value = ProductListViewModelState.TempCart(it.quantity-1, value = product.value*it.quantity-1)
+                    state.value = ProductListViewModelState.TempCart(it.quantity-1, value = product.value*(it.quantity-1))
                 }
             }
         }
@@ -64,7 +64,7 @@ class ProductListViewModel @Inject constructor(
         state.value.let {
             if(it is ProductListViewModelState.TempCart) {
                 if(it.quantity < 10) {
-                    state.value = ProductListViewModelState.TempCart(it.quantity+1, value = product.value*it.quantity+1)
+                    state.value = ProductListViewModelState.TempCart(it.quantity+1, value = product.value*(it.quantity+1))
                 }
             } else {
                 state.value = ProductListViewModelState.TempCart(1, value = product.value)

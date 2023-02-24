@@ -17,6 +17,17 @@ class CategoryRegisterViewModel @Inject constructor(
 
     val state = SingleLiveEvent<CategoryRegisterViewModelState>()
 
+    lateinit var category: List<Category>
+    override fun onCreate() {
+        super.onCreate()
+
+        runAsync({
+            interactor.listCategories()
+        }, onSuccess = {
+            category = it
+        })
+    }
+
     fun editClicked(category: Category) {
         state.value = CategoryRegisterViewModelState.OpenEditScreen(category)
     }
@@ -24,6 +35,4 @@ class CategoryRegisterViewModel @Inject constructor(
     fun deleteClicked(category: Category) {
         state.value = CategoryRegisterViewModelState.ConfirmDelete(category)
     }
-
-    var category: List<Category> = interactor.listCategories()
 }

@@ -27,12 +27,12 @@ class ViewSelector @JvmOverloads constructor(
 
     override fun setSelected(selected: Boolean) {
         super.setSelected(selected)
-        if(selected){
+        elevation = if(selected){
             binding.selectorLabel.setTypeface(null, Typeface.BOLD)
-            elevation = 12f
+            12f
         } else {
             binding.selectorLabel.setTypeface(null, Typeface.NORMAL)
-            elevation = 0f
+            0f
         }
     }
 }

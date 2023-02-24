@@ -24,4 +24,8 @@ interface ProductDao {
 
     @Delete
     fun delete(product: Product)
+    @Update
+    fun update(product: Product)
+    @Insert
+    fun insert(product: Product)
 }
