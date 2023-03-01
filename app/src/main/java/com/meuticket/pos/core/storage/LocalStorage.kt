@@ -32,6 +32,9 @@ interface LocalStorage {
     fun deleteProduct(product: Product)
     fun deleteCategory(category: Category)
     fun saveCategory(category: Category)
+    fun saveEvent(event: Event)
+    fun saveEvents(data: List<Event>)
+    fun deleteEvent(event: Event)
 }
 
 class LocalStorageImpl @Inject constructor(
@@ -106,6 +109,18 @@ class LocalStorageImpl @Inject constructor(
         categoryDao.save(category)
     }
 
+    override fun saveEvent(event: Event) {
+        eventDao.insertOrUpdate(event)
+    }
+
+    override fun saveEvents(data: List<Event>) {
+        eventDao.insertAll(data)
+    }
+
+    override fun deleteEvent(event: Event) {
+        eventDao.delete(event)
+    }
+
     override fun saveUsers(data: List<User>) {
         userDao.insertAll(data)
     }
@@ -133,11 +148,6 @@ class LocalStorageImpl @Inject constructor(
 
     override fun findUser(user: String, password: String): User? {
         return userDao.findByNamePassword(user, password)
-    }
-
-    companion object {
-        const val PRODUCTS_LIST = "products_list"
-        const val CATEGORY_LIST = "category_list"
     }
 
 }

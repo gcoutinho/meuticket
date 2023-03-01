@@ -7,6 +7,8 @@ import javax.inject.Inject
 interface EventRepository {
     suspend fun listFromRemote(): List<Event>
     suspend fun listFromLocal(): List<Event>
+    suspend fun save(event: Event?, name: String)
+    suspend fun delete(event: Event)
 }
 
 class EventRepositoryImpl @Inject constructor(
@@ -28,5 +30,13 @@ class EventRepositoryImpl @Inject constructor(
 
     override suspend fun listFromLocal(): List<Event> {
         return localStorage.getEvents()
+    }
+
+    override suspend fun save(event: Event?, name: String) {
+        localStorage.saveEvent(Event(uid = event?.uid?:0, name))
+    }
+
+    override suspend fun delete(event: Event) {
+        localStorage.deleteEvent(event)
     }
 }

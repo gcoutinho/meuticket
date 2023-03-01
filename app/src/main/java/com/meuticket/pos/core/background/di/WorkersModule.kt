@@ -27,5 +27,10 @@ interface WorkersModule {
     fun bindUsersWorker(worker: UsersWorker.Factory): IWorkerFactory<out ListenableWorker>
 
     @Binds
+    @IntoMap
+    @WorkerKey(EventWorker::class)
+    fun bindEventWorker(worker: EventWorker.Factory): IWorkerFactory<out ListenableWorker>
+
+    @Binds
     abstract fun bindAsyncWorker(asyncWorker: AsyncWorkerImpl): AsyncWorker
 }

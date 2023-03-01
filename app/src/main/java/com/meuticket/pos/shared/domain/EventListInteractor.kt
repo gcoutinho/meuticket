@@ -6,6 +6,8 @@ import javax.inject.Inject
 
 interface EventListInteractor {
     suspend fun listEvents(): List<Event>
+    suspend fun save(event: Event?, name: String)
+    suspend fun delete(event: Event)
 }
 
 class EventListInteractorImpl @Inject constructor(
@@ -14,6 +16,14 @@ class EventListInteractorImpl @Inject constructor(
 
     override suspend fun listEvents(): List<Event> {
         return repository.listFromLocal()
+    }
+
+    override suspend fun save(event: Event?, name: String) {
+        repository.save(event, name)
+    }
+
+    override suspend fun delete(event: Event) {
+        repository.delete(event)
     }
 
 }

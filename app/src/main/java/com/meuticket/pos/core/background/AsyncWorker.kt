@@ -14,6 +14,8 @@ interface AsyncWorker {
     fun uploadProducts()
     fun downloadUsers(application: Application)
     fun downloadCategories(application: Application)
+    fun downloadEvents(application: Application)
+
 }
 
 class AsyncWorkerImpl @Inject constructor(): AsyncWorker {
@@ -39,6 +41,11 @@ class AsyncWorkerImpl @Inject constructor(): AsyncWorker {
     override fun downloadUsers(application: Application) {
         WorkManager.getInstance(application)
             .enqueue(OneTimeWorkRequest.from(UsersWorker::class.java))
+    }
+
+    override fun downloadEvents(application: Application) {
+        WorkManager.getInstance(application)
+            .enqueue(OneTimeWorkRequest.from(EventWorker::class.java))
     }
 
     override fun uploadProducts() {

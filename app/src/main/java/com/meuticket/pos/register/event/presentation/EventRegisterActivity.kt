@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.meuticket.pos.R
@@ -12,6 +13,7 @@ import com.meuticket.pos.base.viewBinding
 import com.meuticket.pos.core.livedata.SafeObserver
 import com.meuticket.pos.databinding.ActivityRegisterEventBinding
 import com.meuticket.pos.register.event.presentation.adapter.EventRegisterAdapter
+import com.meuticket.pos.ui.components.ViewDialog
 import com.meuticket.pos.ui.utils.hideKeyboard
 
 class EventRegisterActivity: BaseMvvmActivity() {
@@ -25,8 +27,6 @@ class EventRegisterActivity: BaseMvvmActivity() {
 
         setContentView(binding.root)
 
-        loadItems()
-
         setupListener()
         setupObservers()
     }
@@ -35,13 +35,42 @@ class EventRegisterActivity: BaseMvvmActivity() {
         viewModel.state.observe(this, SafeObserver { state ->
             when(state) {
                 is EventRegisterViewModelState.ConfirmDelete -> {
-
+                    showDeleteDialog(state.action)
                 }
                 is EventRegisterViewModelState.OpenEditScreen -> {
-                    startActivity(Intent(this, EventFormActivity::class.java))
+                    formIntent.launch(EventFormActivity.newIntent(this, state.event))
+                }
+                EventRegisterViewModelState.EventsLoaded -> {
+                    loadItems()
                 }
             }
         })
+    }
+
+    private fun showDeleteDialog(action: () -> Unit) {
+        val dialog = ViewDialog()
+        dialog.showNow(supportFragmentManager, "DIALOG")
+
+        dialog.apply {
+            title = "Atenção"
+            description = "Deseja excluir o registro?"
+            primaryButtonText = "Sim"
+            setPrimaryButtonListener {
+                action.invoke()
+                dismissAllowingStateLoss()
+            }
+            secondaryButtonText = "Não"
+            setSecondaryButtonListener {
+                dismissAllowingStateLoss()
+            }
+        }
+    }
+
+    val formIntent = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if(it.resultCode == RESULT_OK)
+            viewModel.loadItems()
     }
 
     private fun setupListener() {
