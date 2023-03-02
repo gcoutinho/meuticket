@@ -1,6 +1,5 @@
 package com.meuticket.pos.register.category.presentation
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -15,6 +14,7 @@ import com.meuticket.pos.databinding.ActivityRegisterCategoryBinding
 import com.meuticket.pos.register.category.presentation.adapter.CategoryRegisterAdapter
 import com.meuticket.pos.ui.components.ViewDialog
 import com.meuticket.pos.ui.utils.hideKeyboard
+import com.meuticket.pos.ui.utils.showAlertDialog
 
 class CategoryRegisterActivity: BaseMvvmActivity() {
 
@@ -63,7 +63,7 @@ class CategoryRegisterActivity: BaseMvvmActivity() {
         dialog.showNow(supportFragmentManager, "DIALOG")
 
         dialog.apply {
-            title = "Atenção"
+            title = getString(R.string.warning_alert_title)
             description = "Deseja excluir o registro?"
             primaryButtonText = "Sim"
             setPrimaryButtonListener {
@@ -77,15 +77,7 @@ class CategoryRegisterActivity: BaseMvvmActivity() {
         }
     }
     private fun showCategoryInCartError() {
-        ViewDialog().apply {
-            showNow(supportFragmentManager, "DIALOG")
-            title = "Atenção"
-            description = "Esta categoria está no carrinho, remova-a antes de fazer essa operação"
-            primaryButtonText = "OK"
-            setPrimaryButtonListener {
-                dismissAllowingStateLoss()
-            }
-        }
+        showAlertDialog("Esta categoria está no carrinho, remova-a antes de fazer essa operação")
     }
 
     private fun setupListener() {

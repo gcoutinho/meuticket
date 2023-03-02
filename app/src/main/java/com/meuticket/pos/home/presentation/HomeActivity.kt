@@ -2,6 +2,7 @@ package com.meuticket.pos.home.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import com.meuticket.pos.admin.presentation.AdminActivity
 import com.meuticket.pos.base.BaseMvvmActivity
 import com.meuticket.pos.base.viewBinding
 import com.meuticket.pos.core.livedata.SafeObserver
@@ -34,7 +35,9 @@ class HomeActivity: BaseMvvmActivity() {
                     if(!state.isVisible)
                         binding.cardAdmin.alpha = 0.5f
                     else
-                        binding.cardAdmin.setOnClickListener {  }
+                        binding.cardAdmin.setOnClickListener {
+                            startActivity(Intent(this, AdminActivity::class.java))
+                        }
                 }
                 is HomeViewModelState.RegisterVisibility -> {
                     if(!state.isVisible)
@@ -49,7 +52,8 @@ class HomeActivity: BaseMvvmActivity() {
                     if(!state.isVisible)
                         binding.cardSettings.alpha = 0.5f
                     else
-                        binding.cardSettings.setOnClickListener {  }
+                        binding.cardSettings.setOnClickListener {
+                        }
                 }
             }
         })

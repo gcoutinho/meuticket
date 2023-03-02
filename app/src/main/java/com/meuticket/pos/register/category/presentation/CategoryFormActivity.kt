@@ -9,6 +9,7 @@ import com.meuticket.pos.core.livedata.SafeObserver
 import com.meuticket.pos.databinding.ActivityCategoryFormBinding
 import com.meuticket.pos.shared.data.model.Category
 import com.meuticket.pos.ui.components.ViewDialog
+import com.meuticket.pos.ui.utils.showAlertDialog
 
 class CategoryFormActivity: BaseMvvmActivity() {
 
@@ -33,7 +34,7 @@ class CategoryFormActivity: BaseMvvmActivity() {
         viewModel.state.observe(this, SafeObserver { state ->
             when(state) {
                 is CategoryFormViewModelState.Error -> {
-                    showErrorDialog(state.message)
+                    showAlertDialog(state.message)
                 }
                 CategoryFormViewModelState.SavedSuccess -> {
                     showSuccessDialog()
@@ -47,18 +48,6 @@ class CategoryFormActivity: BaseMvvmActivity() {
 
         binding.submit.setOnClickListener {
             viewModel.save(category, binding.name.text)
-        }
-    }
-
-    private fun showErrorDialog(message: String) {
-        ViewDialog().apply {
-            showNow(supportFragmentManager, "DIALOG")
-            title = "Atenção"
-            description = message
-            primaryButtonText = "OK"
-            setPrimaryButtonListener {
-                dismissAllowingStateLoss()
-            }
         }
     }
 

@@ -3,9 +3,7 @@ package com.meuticket.pos.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import dagger.Binds
 import dagger.MapKey
-import dagger.Module
 import javax.inject.Inject
 import javax.inject.Provider
 import kotlin.reflect.KClass
@@ -39,9 +37,3 @@ class DaggerViewModelFactory @Inject constructor(
 )
 @MapKey
 annotation class ViewModelKey(val value: KClass<out ViewModel>)
-
-@Module
-abstract class ViewModelModule {
-    @Binds
-    abstract fun bindViewModelFactory(factory: DaggerViewModelFactory): ViewModelProvider.Factory
-}

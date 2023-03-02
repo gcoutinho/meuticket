@@ -2,6 +2,7 @@ package com.meuticket.pos.cart.presentation
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.meuticket.pos.R
 import com.meuticket.pos.base.BaseMvvmActivity
 import com.meuticket.pos.base.viewBinding
 import com.meuticket.pos.cart.presentation.adapter.CartAdapter
@@ -61,7 +62,7 @@ class CartActivity: BaseMvvmActivity() {
                     dialog.showNow(supportFragmentManager, "DIALOG")
 
                     dialog.apply {
-                        title = "Atenção"
+                        title = getString(R.string.warning_alert_title)
                         description = "Deseja remover o item do carrinho?"
                         primaryButtonText = "Sim"
                         setPrimaryButtonListener {

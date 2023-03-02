@@ -14,6 +14,7 @@ import com.meuticket.pos.databinding.ActivityRegisterProductsBinding
 import com.meuticket.pos.register.products.presentation.adapter.ProductsRegisterAdapter
 import com.meuticket.pos.ui.components.ViewDialog
 import com.meuticket.pos.ui.utils.hideKeyboard
+import com.meuticket.pos.ui.utils.showAlertDialog
 
 class ProductsRegisterActivity: BaseMvvmActivity() {
 
@@ -76,15 +77,7 @@ class ProductsRegisterActivity: BaseMvvmActivity() {
     }
 
     private fun showProductInCartError() {
-        ViewDialog().apply {
-            showNow(supportFragmentManager, "DIALOG")
-            title = "Atenção"
-            description = "Este produto está no carrinho, remova-o antes de fazer essa operação"
-            primaryButtonText = "OK"
-            setPrimaryButtonListener {
-                dismissAllowingStateLoss()
-            }
-        }
+        showAlertDialog("Este produto está no carrinho, remova-o antes de fazer essa operação")
     }
 
     private fun setupListener() {

@@ -3,4 +3,6 @@
     <string name="login_submit">Entrar</string>
     <string name="go_to_cart">Ver carrinho</string>
     <string name="print_list">Imprimir Lista</string>
+    <string name="warning_alert_title">Atenção</string>
+    <string name="error_button_ok">OK</string>
 </resources>

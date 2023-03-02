@@ -17,10 +17,14 @@ class EventFormViewModel @Inject constructor(
     val state = SingleLiveEvent<EventFormViewModelState>()
     fun save(event: Event?, name: String) {
         runAsync({
+
             val eventExists = eventListInteractor.listEvents().firstOrNull { it.name == name }
+
             if(eventExists != null && eventExists.uid != (event?.uid?: 0))
                 throw RuntimeException("Evento já existe")
+
             eventListInteractor.save(event, name)
+
         }, onSuccess = {
             state.value = EventFormViewModelState.SavedSuccess
         }, onError = {

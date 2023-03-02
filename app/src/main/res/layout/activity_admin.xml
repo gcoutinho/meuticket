@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/light_2">
+
+        <com.meuticket.pos.ui.components.ViewToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ToolbarStyle"
+            android:id="@+id/toolbar"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.meuticket.pos.ui.components.ViewCard
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/admin_open_cash"
+                    app:label="Abrir caixa"
+                    android:layout_toLeftOf="@id/guideline"/>
+
+                <com.meuticket.pos.ui.components.ViewCard
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/admin_close_cash"
+                    app:label="Fechar caixa"
+                    android:layout_toRightOf="@id/guideline"/>
+
+                <com.meuticket.pos.ui.components.ViewCard
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/admin_withdraw"
+                    app:label="Sangria"
+                    android:layout_toLeftOf="@id/guideline"
+                    android:layout_below="@id/admin_open_cash"/>
+
+                <com.meuticket.pos.ui.components.ViewCard
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/admin_input"
+                    app:label="Suprimentos"
+                    android:layout_toRightOf="@id/guideline"
+                    android:layout_below="@id/admin_close_cash"/>
+
+                <com.meuticket.pos.ui.components.ViewCard
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/admin_cash_balance"
+                    app:label="Saldo de caixa"
+                    android:layout_toLeftOf="@id/guideline"
+                    android:layout_below="@id/admin_withdraw"/>
+
+                <com.meuticket.pos.ui.components.ViewCard
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/admin_rollback"
+                    app:label="Estornos"
+                    android:layout_toRightOf="@id/guideline"
+                    android:layout_below="@id/admin_input"/>
+
+                <com.meuticket.pos.ui.components.ViewCard
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/admin_reprint"
+                    app:label="Reimprimir fechamento"
+                    android:layout_toLeftOf="@id/guideline"
+                    android:layout_below="@id/admin_cash_balance"/>
+
+                <com.meuticket.pos.ui.components.ViewCard
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/admin_product_list"
+                    app:label="Relatório de produtos"
+                    android:layout_toRightOf="@id/guideline"
+                    android:layout_below="@id/admin_rollback"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/guideline"/>
+            </RelativeLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+</layout>

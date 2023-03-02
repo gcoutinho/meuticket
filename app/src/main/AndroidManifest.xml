@@ -42,6 +42,7 @@
         <activity android:name=".register.event.presentation.EventRegisterActivity"/>
         <activity android:name=".register.event.presentation.EventFormActivity"/>
         <activity android:name=".cart.presentation.CartActivity"/>
+        <activity android:name=".admin.presentation.AdminActivity"/>
 
         <provider
             android:name="androidx.startup.InitializationProvider"

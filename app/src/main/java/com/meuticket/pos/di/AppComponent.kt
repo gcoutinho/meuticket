@@ -2,6 +2,7 @@ package com.meuticket.pos.di
 
 import android.app.Application
 import com.meuticket.pos.CustomApplication
+import com.meuticket.pos.admin.di.AdminModuleBuilder
 import com.meuticket.pos.cart.di.CartModuleBuilder
 import com.meuticket.pos.core.background.di.WorkersModule
 import com.meuticket.pos.core.storage.di.RoomModule
@@ -9,10 +10,7 @@ import com.meuticket.pos.home.di.HomeModuleBuilder
 import com.meuticket.pos.register.di.RegisterModuleBuilder
 import com.meuticket.pos.login.di.LoginModuleBuilder
 import com.meuticket.pos.payment.di.PaymentModuleBuilder
-import com.meuticket.pos.shared.di.CategoryModule
-import com.meuticket.pos.shared.di.EventModule
-import com.meuticket.pos.shared.di.ProductsModule
-import com.meuticket.pos.shared.di.UsersModule
+import com.meuticket.pos.shared.di.*
 import com.meuticket.pos.ticket.di.NewTicketModuleBuilder
 import dagger.BindsInstance
 import dagger.Component
@@ -35,11 +33,13 @@ import javax.inject.Singleton
         PaymentModuleBuilder::class,
         RegisterModuleBuilder::class,
         CartModuleBuilder::class,
+        AdminModuleBuilder::class,
 
         ProductsModule::class,
         UsersModule::class,
         CategoryModule::class,
-        EventModule::class
+        EventModule::class,
+        CashRegisterModule::class
     ]
 )
 interface AppComponent : AndroidInjector<DaggerApplication> {

@@ -1,14 +1,8 @@
 package com.meuticket.pos.core.storage
 
 import android.util.Log
-import com.meuticket.pos.core.storage.dao.CategoryDao
-import com.meuticket.pos.core.storage.dao.EventDao
-import com.meuticket.pos.core.storage.dao.ProductDao
-import com.meuticket.pos.core.storage.dao.UserDao
-import com.meuticket.pos.shared.data.model.Category
-import com.meuticket.pos.shared.data.model.Event
-import com.meuticket.pos.shared.data.model.Product
-import com.meuticket.pos.shared.data.model.User
+import com.meuticket.pos.core.storage.dao.*
+import com.meuticket.pos.shared.data.model.*
 import javax.inject.Inject
 
 interface LocalStorage {
@@ -35,13 +29,17 @@ interface LocalStorage {
     fun saveEvent(event: Event)
     fun saveEvents(data: List<Event>)
     fun deleteEvent(event: Event)
+    fun listCashRegisters(): List<CashRegister>
+    fun getLastCashRegister(): CashRegister?
+    fun saveCashRegister(cashRegister: CashRegister)
 }
 
 class LocalStorageImpl @Inject constructor(
     val userDao: UserDao,
     val productDao: ProductDao,
     val categoryDao: CategoryDao,
-    val eventDao: EventDao
+    val eventDao: EventDao,
+    val cashRegisterDao: CashRegisterDao
 ): LocalStorage {
     override fun saveOrder() {
         TODO("Not yet implemented")
@@ -119,6 +117,18 @@ class LocalStorageImpl @Inject constructor(
 
     override fun deleteEvent(event: Event) {
         eventDao.delete(event)
+    }
+
+    override fun listCashRegisters(): List<CashRegister> {
+        return cashRegisterDao.getAll()
+    }
+
+    override fun getLastCashRegister(): CashRegister? {
+        return cashRegisterDao.findLast()
+    }
+
+    override fun saveCashRegister(cashRegister: CashRegister) {
+        cashRegisterDao.save(cashRegister)
     }
 
     override fun saveUsers(data: List<User>) {

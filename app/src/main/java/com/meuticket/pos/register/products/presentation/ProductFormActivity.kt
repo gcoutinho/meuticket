@@ -16,6 +16,7 @@ import com.meuticket.pos.databinding.ViewDialogSelectorItemBinding
 import com.meuticket.pos.shared.data.model.Category
 import com.meuticket.pos.shared.data.model.Product
 import com.meuticket.pos.ui.components.ViewDialog
+import com.meuticket.pos.ui.utils.showAlertDialog
 import com.meuticket.pos.utils.MoneyWatcher
 import com.meuticket.pos.utils.toFormattedCurrency
 import java.math.BigDecimal
@@ -51,7 +52,7 @@ class ProductFormActivity: BaseMvvmActivity() {
                     showCategoriesSelector(state.categories)
                 }
                 is ProductFormViewModelState.Error -> {
-                    showErrorDialog(state.message)
+                    showAlertDialog(state.message)
                 }
                 ProductFormViewModelState.SavedSuccess -> {
                     showSuccessDialog()
@@ -70,18 +71,6 @@ class ProductFormActivity: BaseMvvmActivity() {
                 dismissAllowingStateLoss()
                 setResult(RESULT_OK)
                 finish()
-            }
-        }
-    }
-
-    private fun showErrorDialog(message: String) {
-        ViewDialog().apply {
-            showNow(supportFragmentManager, "DIALOG")
-            title = "Atenção"
-            description = message
-            primaryButtonText = "OK"
-            setPrimaryButtonListener {
-                dismissAllowingStateLoss()
             }
         }
     }

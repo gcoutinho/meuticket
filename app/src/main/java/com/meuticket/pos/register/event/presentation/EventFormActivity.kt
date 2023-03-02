@@ -9,6 +9,7 @@ import com.meuticket.pos.core.livedata.SafeObserver
 import com.meuticket.pos.databinding.ActivityEventFormBinding
 import com.meuticket.pos.shared.data.model.Event
 import com.meuticket.pos.ui.components.ViewDialog
+import com.meuticket.pos.ui.utils.showAlertDialog
 
 class EventFormActivity: BaseMvvmActivity() {
 
@@ -35,7 +36,7 @@ class EventFormActivity: BaseMvvmActivity() {
                     showSuccessDialog()
                 }
                 is EventFormViewModelState.ShowError -> {
-                    showErrorDialog(state.message)
+                    showAlertDialog(state.message)
                 }
             }
         })
@@ -50,17 +51,6 @@ class EventFormActivity: BaseMvvmActivity() {
                 dismissAllowingStateLoss()
                 setResult(RESULT_OK)
                 finish()
-            }
-        }
-    }
-    private fun showErrorDialog(message: String) {
-        ViewDialog().apply {
-            showNow(supportFragmentManager, "DIALOG")
-            title = "Atenção"
-            description = message
-            primaryButtonText = "OK"
-            setPrimaryButtonListener {
-                dismissAllowingStateLoss()
             }
         }
     }

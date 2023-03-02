@@ -1,11 +1,8 @@
 package com.meuticket.pos.register.users.presentation
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +14,7 @@ import com.meuticket.pos.databinding.ActivityRegisterUsersBinding
 import com.meuticket.pos.register.users.presentation.adapter.UsersRegisterAdapter
 import com.meuticket.pos.ui.components.ViewDialog
 import com.meuticket.pos.ui.utils.hideKeyboard
+import com.meuticket.pos.ui.utils.showAlertDialog
 
 class UsersRegisterActivity: BaseMvvmActivity() {
 
@@ -50,17 +48,9 @@ class UsersRegisterActivity: BaseMvvmActivity() {
     }
 
     private fun deleteMyselfError() {
-        val dialog = ViewDialog()
-        dialog.showNow(supportFragmentManager, "DIALOG")
 
-        dialog.apply {
-            title = "Atenção"
-            description = "Não é possível deletar um usuário logado, entre com outra conta admin"
-            primaryButtonText = "OK"
-            setPrimaryButtonListener {
-                dismissAllowingStateLoss()
-            }
-        }
+        showAlertDialog("Não é possível deletar um usuário logado, entre com outra conta admin")
+
     }
 
     val formIntent = registerForActivityResult(
