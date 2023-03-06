@@ -7,9 +7,9 @@ import java.util.*
 
 @Entity
 class CashRegister(
-    @PrimaryKey(autoGenerate = true)
-    val uid: Int = 0,
-    @ColumnInfo val event_uid: Int,
+    @PrimaryKey
+    val uid: String,
+    @ColumnInfo val event_uid: String,
     @ColumnInfo val open_cash: Double,
 ) {
     @ColumnInfo var closeDate: Long? = null

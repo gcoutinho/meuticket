@@ -42,17 +42,14 @@ class EventFormActivity: BaseMvvmActivity() {
         })
     }
     private fun showSuccessDialog() {
-        ViewDialog().apply {
-            showNow(supportFragmentManager, "DIALOG")
-            title = "Sucesso"
-            description = "Dados salvos com sucesso!"
-            primaryButtonText = "OK"
-            setPrimaryButtonListener {
-                dismissAllowingStateLoss()
+        showAlertDialog(
+            title = "Sucesso",
+            message = "Dados salvos com sucesso!",
+            primaryButtonAction = {
                 setResult(RESULT_OK)
                 finish()
             }
-        }
+        )
     }
 
     private fun setupListeners() {

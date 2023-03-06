@@ -8,8 +8,7 @@ import com.meuticket.pos.base.viewBinding
 import com.meuticket.pos.core.livedata.SafeObserver
 import com.meuticket.pos.databinding.ActivityUserFormBinding
 import com.meuticket.pos.shared.data.model.User
-import com.meuticket.pos.ui.components.ViewDialog
-import kotlinx.android.synthetic.main.activity_user_form.*
+import com.meuticket.pos.ui.utils.showAlertDialog
 
 class UserFormActivity: BaseMvvmActivity() {
 
@@ -47,33 +46,21 @@ class UserFormActivity: BaseMvvmActivity() {
     }
 
     private fun showSuccessDialog() {
-        val dialog = ViewDialog()
-        dialog.showNow(supportFragmentManager, "DIALOG")
-
-        dialog.apply {
-            title = "Sucesso"
-            description = "Dados salvos com sucesso!"
-            primaryButtonText = "OK"
-            setPrimaryButtonListener {
-                dismissAllowingStateLoss()
+        showAlertDialog(
+            title = "Sucesso",
+            message = "Dados salvos com sucesso!",
+            primaryButtonAction = {
                 setResult(RESULT_OK)
                 finish()
             }
-        }
+        )
     }
 
     private fun showInputError(message: String) {
-        val dialog = ViewDialog()
-        dialog.showNow(supportFragmentManager, "DIALOG")
-
-        dialog.apply {
-            title = "Atenção"
-            description = message
+        showAlertDialog(
+            message = message,
             primaryButtonText = "Entendi"
-            setPrimaryButtonListener {
-                dismissAllowingStateLoss()
-            }
-        }
+        )
     }
 
     private fun setupListeners() {

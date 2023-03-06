@@ -3,6 +3,7 @@ package com.meuticket.pos.core.storage
 import android.util.Log
 import com.meuticket.pos.core.storage.dao.*
 import com.meuticket.pos.shared.data.model.*
+import java.util.UUID
 import javax.inject.Inject
 
 interface LocalStorage {
@@ -19,7 +20,7 @@ interface LocalStorage {
     fun getEvents(): List<Event>
     fun saveCategories(data: List<Category>)
     fun saveUser(username: String, password: String, admin: Boolean)
-    fun updateUser(uid: Int, username: String, password: String, admin: Boolean)
+    fun updateUser(uid: String, username: String, password: String, admin: Boolean)
     fun deleteUser(user: User)
     fun updateProduct(product: Product)
     fun insertProduct(product: Product)
@@ -76,10 +77,10 @@ class LocalStorageImpl @Inject constructor(
     }
 
     override fun saveUser(username: String, password: String, admin: Boolean) {
-        userDao.insert(User(name = username, password = password, admin = admin))
+        userDao.insert(User(uid = UUID.randomUUID().toString(), name = username, password = password, admin = admin))
     }
 
-    override fun updateUser(uid: Int, username: String, password: String, admin: Boolean) {
+    override fun updateUser(uid: String, username: String, password: String, admin: Boolean) {
         userDao.update(User(uid, username, password, admin))
     }
 
@@ -140,6 +141,7 @@ class LocalStorageImpl @Inject constructor(
         return try {
             categoryDao.getAll()
         } catch (ex: Exception) {
+            ex.printStackTrace()
             emptyList()
         }
     }
@@ -148,6 +150,7 @@ class LocalStorageImpl @Inject constructor(
         return try {
             eventDao.getAll()
         } catch (ex: Exception) {
+            ex.printStackTrace()
             emptyList()
         }
     }

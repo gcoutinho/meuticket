@@ -2,6 +2,7 @@ package com.meuticket.pos.shared.domain
 
 import com.meuticket.pos.shared.data.CategoryRepository
 import com.meuticket.pos.shared.data.model.Category
+import java.util.UUID
 import javax.inject.Inject
 
 interface CategoryListInteractor {
@@ -23,7 +24,7 @@ class CategoryListInteractorImpl @Inject constructor(
     }
 
     override suspend fun save(category: Category?, name: String) {
-        repository.save(Category(category?.uid?:0, name))
+        repository.save(Category(category?.uid?:UUID.randomUUID().toString(), name))
     }
 
 }

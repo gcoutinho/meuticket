@@ -18,11 +18,11 @@ class CategoryRepositoryImpl @Inject constructor(
     override suspend fun listFromRemote(): List<Category> {
         return mutableListOf(
             Category(
-                1,
+                "123-456-789",
                 "bebidas"
             ),
             Category(
-                2,
+                "9123-456-789",
                 "lanches"
             ),
         )

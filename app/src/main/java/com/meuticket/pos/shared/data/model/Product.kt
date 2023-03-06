@@ -7,11 +7,11 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Product(
-    @PrimaryKey(autoGenerate = true) val uid: Int = 0,
+    @PrimaryKey val uid: String,
     @ColumnInfo val name: String,
     @ColumnInfo val image: String,
     @ColumnInfo val value: Double,
-    @ColumnInfo val category_uid: Int
+    @ColumnInfo val category_uid: String
 ): java.io.Serializable {
     var qtd: Int = 0
 

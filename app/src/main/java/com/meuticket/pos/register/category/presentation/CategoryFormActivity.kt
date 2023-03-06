@@ -8,7 +8,6 @@ import com.meuticket.pos.base.viewBinding
 import com.meuticket.pos.core.livedata.SafeObserver
 import com.meuticket.pos.databinding.ActivityCategoryFormBinding
 import com.meuticket.pos.shared.data.model.Category
-import com.meuticket.pos.ui.components.ViewDialog
 import com.meuticket.pos.ui.utils.showAlertDialog
 
 class CategoryFormActivity: BaseMvvmActivity() {
@@ -52,17 +51,15 @@ class CategoryFormActivity: BaseMvvmActivity() {
     }
 
     private fun showSuccessDialog() {
-        ViewDialog().apply {
-            showNow(supportFragmentManager, "DIALOG")
-            title = "Sucesso"
-            description = "Dados salvos com sucesso!"
-            primaryButtonText = "OK"
-            setPrimaryButtonListener {
-                dismissAllowingStateLoss()
+
+        showAlertDialog(
+            title = "Sucesso",
+            message = "Dados salvos com sucesso!",
+            primaryButtonAction = {
                 setResult(RESULT_OK)
                 finish()
             }
-        }
+        )
     }
 
     companion object {

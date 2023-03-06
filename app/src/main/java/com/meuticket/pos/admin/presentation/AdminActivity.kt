@@ -5,6 +5,8 @@ import com.meuticket.pos.base.BaseMvvmActivity
 import com.meuticket.pos.base.viewBinding
 import com.meuticket.pos.core.livedata.SafeObserver
 import com.meuticket.pos.databinding.ActivityAdminBinding
+import com.meuticket.pos.shared.data.model.CashRegister
+import com.meuticket.pos.ui.utils.showAlertDialog
 
 class AdminActivity: BaseMvvmActivity() {
 
@@ -25,16 +27,24 @@ class AdminActivity: BaseMvvmActivity() {
         viewModel.state.observe(this, SafeObserver { state ->
             when (state) {
                 is AdminViewModelState.GoToCloseCash -> {
-
+                    showCloseCashDialog(state.cashRegister)
                 }
                 AdminViewModelState.GoToOpenCash -> {
-
+                    showOpenCashDialog()
                 }
                 is AdminViewModelState.ShowError -> {
-
+                    showAlertDialog(state.message)
                 }
             }
         })
+    }
+
+    private fun showOpenCashDialog() {
+
+    }
+
+    private fun showCloseCashDialog(cashRegister: CashRegister) {
+
     }
 
     private fun setupListeners() {

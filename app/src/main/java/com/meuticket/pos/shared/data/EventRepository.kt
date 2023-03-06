@@ -2,6 +2,7 @@ package com.meuticket.pos.shared.data
 
 import com.meuticket.pos.core.storage.LocalStorage
 import com.meuticket.pos.shared.data.model.Event
+import java.util.UUID
 import javax.inject.Inject
 
 interface EventRepository {
@@ -18,11 +19,11 @@ class EventRepositoryImpl @Inject constructor(
     override suspend fun listFromRemote(): List<Event> {
         return mutableListOf(
             Event(
-                1,
+                "123-456-789",
                 "show 1"
             ),
             Event(
-                2,
+                "9123-456-789",
                 "show 2"
             ),
         )
@@ -33,7 +34,7 @@ class EventRepositoryImpl @Inject constructor(
     }
 
     override suspend fun save(event: Event?, name: String) {
-        localStorage.saveEvent(Event(uid = event?.uid?:0, name))
+        localStorage.saveEvent(Event(uid = event?.uid?:UUID.randomUUID().toString(), name))
     }
 
     override suspend fun delete(event: Event) {

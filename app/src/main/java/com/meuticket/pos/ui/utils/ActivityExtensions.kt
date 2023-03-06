@@ -5,8 +5,8 @@ import com.meuticket.pos.base.BaseMvvmActivity
 import com.meuticket.pos.ui.components.ViewDialog
 
 fun BaseMvvmActivity.showAlertDialog(
-    title: String = getString(R.string.warning_alert_title),
     message: String,
+    title: String = getString(R.string.warning_alert_title),
     primaryButtonText: String = getString(R.string.error_button_ok),
     primaryButtonAction: (() -> Unit)? = null
 ) {
@@ -16,10 +16,8 @@ fun BaseMvvmActivity.showAlertDialog(
         description = message
         this.primaryButtonText = primaryButtonText
         setPrimaryButtonListener {
-            if(primaryButtonAction != null)
-                primaryButtonAction.invoke()
-            else
-                dismissAllowingStateLoss()
+            primaryButtonAction?.invoke()
+            dismissAllowingStateLoss()
         }
     }
 }

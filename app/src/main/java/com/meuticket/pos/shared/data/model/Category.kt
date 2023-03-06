@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Category(
-    @PrimaryKey(autoGenerate = true) val uid: Int,
+    @PrimaryKey val uid: String,
     @ColumnInfo val name: String
 ): java.io.Serializable

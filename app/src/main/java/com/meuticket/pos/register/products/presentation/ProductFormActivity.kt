@@ -15,7 +15,6 @@ import com.meuticket.pos.databinding.ActivityProductFormBinding
 import com.meuticket.pos.databinding.ViewDialogSelectorItemBinding
 import com.meuticket.pos.shared.data.model.Category
 import com.meuticket.pos.shared.data.model.Product
-import com.meuticket.pos.ui.components.ViewDialog
 import com.meuticket.pos.ui.utils.showAlertDialog
 import com.meuticket.pos.utils.MoneyWatcher
 import com.meuticket.pos.utils.toFormattedCurrency
@@ -62,17 +61,14 @@ class ProductFormActivity: BaseMvvmActivity() {
     }
 
     private fun showSuccessDialog() {
-        ViewDialog().apply {
-            showNow(supportFragmentManager, "DIALOG")
-            title = "Sucesso"
-            description = "Dados salvos com sucesso!"
-            primaryButtonText = "OK"
-            setPrimaryButtonListener {
-                dismissAllowingStateLoss()
+        showAlertDialog(
+            title = "Sucesso",
+            message = "Dados salvos com sucesso!",
+            primaryButtonAction = {
                 setResult(RESULT_OK)
                 finish()
             }
-        }
+        )
     }
 
     private fun setupView() {

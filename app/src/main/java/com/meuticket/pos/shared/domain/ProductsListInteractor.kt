@@ -4,6 +4,7 @@ import com.meuticket.pos.shared.data.CategoryRepository
 import com.meuticket.pos.shared.data.ProductsRepository
 import com.meuticket.pos.shared.data.model.Category
 import com.meuticket.pos.shared.data.model.Product
+import java.util.UUID
 import javax.inject.Inject
 
 interface ProductsListInteractor {
@@ -50,7 +51,7 @@ class ProductsListInteractorImpl @Inject constructor(
         if(product != null) {
             repository.update(Product(product.uid, name, product.image, value, categoryId).apply { this.printReceipt = printReceipt })
         } else {
-            repository.insert(Product(name = name, image = "", value = value, category_uid = categoryId).apply { this.printReceipt = printReceipt })
+            repository.insert(Product(uid = UUID.randomUUID().toString(), name = name, image = "", value = value, category_uid = categoryId).apply { this.printReceipt = printReceipt })
         }
     }
 

@@ -17,10 +17,10 @@ class UsersRepositoryImpl @Inject constructor(
     override suspend fun listUsersFromRemote(): List<User> {
         return mutableListOf(
             User(
-                uid = 1, "admin", "1234", true
+                uid = "aaaa-aaaa-aaaa", "admin", "1234", true
             ),
             User(
-                uid = 2, "teste", "1234", false
+                uid = "1111-111-1111", "teste", "1234", false
             ),
         )
     }

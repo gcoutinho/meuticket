@@ -3,10 +3,7 @@ package com.meuticket.pos.core.storage.di
 import android.app.Application
 import androidx.room.Room
 import com.meuticket.pos.core.storage.AppDatabase
-import com.meuticket.pos.core.storage.dao.CategoryDao
-import com.meuticket.pos.core.storage.dao.EventDao
-import com.meuticket.pos.core.storage.dao.ProductDao
-import com.meuticket.pos.core.storage.dao.UserDao
+import com.meuticket.pos.core.storage.dao.*
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -35,6 +32,12 @@ class RoomModule {
     @Provides
     fun providesCategoryDao(AppDatabase: AppDatabase): CategoryDao {
         return AppDatabase.categoryDao()
+    }
+
+    @Singleton
+    @Provides
+    fun providesCashRegisterDao(AppDatabase: AppDatabase): CashRegisterDao {
+        return AppDatabase.cashRegisterDao()
     }
 
     @Singleton
