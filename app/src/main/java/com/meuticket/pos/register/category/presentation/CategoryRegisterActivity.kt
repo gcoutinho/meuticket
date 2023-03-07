@@ -64,20 +64,20 @@ class CategoryRegisterActivity: BaseMvvmActivity() {
 
         dialog.apply {
             title = getString(R.string.warning_alert_title)
-            description = "Deseja excluir o registro?"
-            primaryButtonText = "Sim"
+            description = getString(R.string.delete_dialog_message)
+            primaryButtonText = getString(R.string.dialog_yes)
             setPrimaryButtonListener {
                 action.invoke()
                 dismissAllowingStateLoss()
             }
-            secondaryButtonText = "Não"
+            secondaryButtonText = getString(R.string.dialog_no)
             setSecondaryButtonListener {
                 dismissAllowingStateLoss()
             }
         }
     }
     private fun showCategoryInCartError() {
-        showAlertDialog("Esta categoria está no carrinho, remova-a antes de fazer essa operação")
+        showAlertDialog(getString(R.string.category_in_cart_error))
     }
 
     private fun setupListener() {

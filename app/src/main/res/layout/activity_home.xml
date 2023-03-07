@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/card_order"
-            app:label="Venda"
+            app:label="@string/home_new_ticket"
             app:icon="@drawable/ic_mdi_database_plus_outline"
             android:layout_toLeftOf="@id/guideline"
             android:layout_above="@id/guideline"/>
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/card_registers"
-            app:label="Cadastros"
+            app:label="@string/home_registers"
             app:icon="@drawable/ic_mdi_account_edit_outline"
             android:layout_toRightOf="@id/guideline"
             android:layout_above="@id/guideline"/>
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/card_admin"
-            app:label="Administração"
+            app:label="@string/home_admin"
             app:icon="@drawable/ic_mdi_archive_check_outline"
             android:layout_toLeftOf="@id/guideline"
             android:layout_below="@id/guideline"/>
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/card_settings"
-            app:label="Configurações"
+            app:label="@string/home_settings"
             app:icon="@drawable/ic_mdi_wrench_cog_outline"
             android:layout_toRightOf="@id/guideline"
             android:layout_below="@id/guideline"/>

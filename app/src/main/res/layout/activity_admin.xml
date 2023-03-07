@@ -24,21 +24,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/admin_open_cash"
-                    app:label="Abrir caixa"
+                    app:label="@string/admin_open_cash"
                     android:layout_toLeftOf="@id/guideline"/>
 
                 <com.meuticket.pos.ui.components.ViewCard
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/admin_close_cash"
-                    app:label="Fechar caixa"
+                    app:label="@string/admin_close_cash"
                     android:layout_toRightOf="@id/guideline"/>
 
                 <com.meuticket.pos.ui.components.ViewCard
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/admin_withdraw"
-                    app:label="Sangria"
+                    app:label="@string/admin_withdraw"
                     android:layout_toLeftOf="@id/guideline"
                     android:layout_below="@id/admin_open_cash"/>
 
@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/admin_input"
-                    app:label="Suprimentos"
+                    app:label="@string/admin_input"
                     android:layout_toRightOf="@id/guideline"
                     android:layout_below="@id/admin_close_cash"/>
 
@@ -54,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/admin_cash_balance"
-                    app:label="Saldo de caixa"
+                    app:label="@string/admin_cash_balance"
                     android:layout_toLeftOf="@id/guideline"
                     android:layout_below="@id/admin_withdraw"/>
 
@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/admin_rollback"
-                    app:label="Estornos"
+                    app:label="@string/admin_rollback"
                     android:layout_toRightOf="@id/guideline"
                     android:layout_below="@id/admin_input"/>
 
@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/admin_reprint"
-                    app:label="Reimprimir fechamento"
+                    app:label="@string/admin_reprint"
                     android:layout_toLeftOf="@id/guideline"
                     android:layout_below="@id/admin_cash_balance"/>
 
@@ -78,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/admin_product_list"
-                    app:label="Relatório de produtos"
+                    app:label="@string/admin_product_list"
                     android:layout_toRightOf="@id/guideline"
                     android:layout_below="@id/admin_rollback"/>
 

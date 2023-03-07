@@ -38,7 +38,7 @@ class NewTicketActivity: BaseMvvmActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
-        title = "Nova Venda"
+        title = getString(R.string.new_ticket_title)
 
         setupObservers()
         setupListeners()

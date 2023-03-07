@@ -3,6 +3,7 @@ package com.meuticket.pos.register.users.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import com.meuticket.pos.R
 import com.meuticket.pos.base.BaseMvvmActivity
 import com.meuticket.pos.base.viewBinding
 import com.meuticket.pos.core.livedata.SafeObserver
@@ -26,7 +27,7 @@ class UserFormActivity: BaseMvvmActivity() {
         user = intent.getSerializableExtra(USER_EXTRA) as User?
 
         if(user != null)
-            binding.submit.text = "Atualizar"
+            binding.submit.text = getString(R.string.update_button)
 
         setupListeners()
         setupObservers()
@@ -47,8 +48,8 @@ class UserFormActivity: BaseMvvmActivity() {
 
     private fun showSuccessDialog() {
         showAlertDialog(
-            title = "Sucesso",
-            message = "Dados salvos com sucesso!",
+            title = getString(R.string.success),
+            message = getString(R.string.saved_success_message),
             primaryButtonAction = {
                 setResult(RESULT_OK)
                 finish()
@@ -59,7 +60,7 @@ class UserFormActivity: BaseMvvmActivity() {
     private fun showInputError(message: String) {
         showAlertDialog(
             message = message,
-            primaryButtonText = "Entendi"
+            primaryButtonText = getString(R.string.user_gotit_label)
         )
     }
 

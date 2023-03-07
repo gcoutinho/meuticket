@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View.OnClickListener
 import android.widget.ScrollView
 import androidx.appcompat.widget.LinearLayoutCompat
+import com.meuticket.pos.R
 import com.meuticket.pos.base.BaseMvvmActivity
 import com.meuticket.pos.base.viewBinding
 import com.meuticket.pos.core.livedata.SafeObserver
@@ -37,7 +38,7 @@ class ProductFormActivity: BaseMvvmActivity() {
         product = intent.getSerializableExtra(PRODUCT_EXTRA) as Product?
 
         if(product != null)
-            binding.submit.text = "Atualizar"
+            binding.submit.text = getString(R.string.update_button)
 
         setupListeners()
         setupView()
@@ -62,8 +63,8 @@ class ProductFormActivity: BaseMvvmActivity() {
 
     private fun showSuccessDialog() {
         showAlertDialog(
-            title = "Sucesso",
-            message = "Dados salvos com sucesso!",
+            title = getString(R.string.success),
+            message = getString(R.string.saved_success_message),
             primaryButtonAction = {
                 setResult(RESULT_OK)
                 finish()

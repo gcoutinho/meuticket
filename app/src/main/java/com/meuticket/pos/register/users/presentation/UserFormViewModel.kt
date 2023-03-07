@@ -1,5 +1,7 @@
 package com.meuticket.pos.register.users.presentation
 
+import android.content.res.Resources
+import com.meuticket.pos.R
 import com.meuticket.pos.base.BaseViewModel
 import com.meuticket.pos.core.livedata.SingleLiveEvent
 import com.meuticket.pos.shared.data.model.User
@@ -12,6 +14,7 @@ sealed class UserFormViewModelState {
 }
 
 class UserFormViewModel @Inject constructor(
+    val resources: Resources,
     val interactor: UsersListInteractor
 ): BaseViewModel() {
 
@@ -19,7 +22,7 @@ class UserFormViewModel @Inject constructor(
     fun insertOrUpdate(user: User?, username: String, password: String, isAdmin: Boolean) {
 
         if(username.length < 3 || password.length < 4) {
-            state.value = UserFormViewModelState.InputError(message = "Usuário deve conter mais de 3 caracteres\nSenha deve conter mais de 4 caracteres")
+            state.value = UserFormViewModelState.InputError(message = resources.getString(R.string.user_validation_message))
         } else {
             runAsync(
                 {

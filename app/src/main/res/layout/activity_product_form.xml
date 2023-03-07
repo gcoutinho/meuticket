@@ -21,32 +21,32 @@
         <com.meuticket.pos.ui.components.ViewInput
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:label="Nome *"
+            app:label="@string/name_label"
             android:id="@+id/name"
-            app:hint="Digite o nome do produto"/>
+            app:hint="@string/product_name_hint"/>
 
         <com.meuticket.pos.ui.components.ViewInput
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:label="Valor *"
+            app:label="@string/value_label"
             android:id="@+id/value"
             app:inputType="number"
-            app:hint="Digite o valor do produto"
+            app:hint="@string/product_value_hint"
             android:layout_marginTop="@dimen/margin_large"/>
 
         <com.meuticket.pos.ui.components.ViewInput
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:label="Categoria *"
+            app:label="@string/category_label"
             android:id="@+id/category"
-            app:hint="Selecione uma categoria"
+            app:hint="@string/product_category_hint"
             app:drawableEnd="@drawable/ic_mdi_arrow_down_drop_circle"
             android:layout_marginTop="@dimen/margin_large"/>
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Imprime segunda via?"
+            android:text="@string/product_print_receipt"
             android:layoutDirection="rtl"
             android:id="@+id/print_receipt"/>
 
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/PrimaryButton"
-            android:text="Cadastrar"
+            android:text="@string/submit_save"
             android:id="@+id/submit"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin_large"/>

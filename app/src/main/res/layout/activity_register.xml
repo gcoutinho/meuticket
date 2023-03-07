@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/register_products"
-            app:label="Produtos"
+            app:label="@string/products"
             app:icon="@drawable/ic_mdi_basket"
             android:layout_toLeftOf="@id/guideline"
             android:layout_above="@id/guideline"/>
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/register_users"
-            app:label="Usuários"
+            app:label="@string/users"
             app:icon="@drawable/ic_mdi_account_supervisor"
             android:layout_toRightOf="@id/guideline"
             android:layout_above="@id/guideline"/>
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/register_categories"
-            app:label="Categorias"
+            app:label="@string/categories"
             app:icon="@drawable/ic_plus"
             android:layout_toLeftOf="@id/guideline"
             android:layout_below="@id/guideline"/>
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/register_events"
-            app:label="Eventos"
+            app:label="@string/events"
             app:icon="@drawable/ic_mdi_calendar_month"
             android:layout_toRightOf="@id/guideline"
             android:layout_below="@id/guideline"/>

@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/login_settings"
             android:layout_marginTop="@dimen/margin_medium2"
-            app:label="Usuário"
+            app:label="@string/login_user_label"
             app:text="admin"
             android:id="@+id/login_user"
             app:imeOptions="actionNext"/>
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/login_user"
-            app:label="Senha"
+            app:label="@string/login_password_label"
             app:text="1234"
             android:id="@+id/login_password"
             android:layout_marginTop="@dimen/margin_medium2"
@@ -65,7 +65,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:gravity="center"
             android:layout_marginBottom="@dimen/margin_large"
-            android:text="Expiração: 08/11\n17044902902"/>
+            android:text="@string/login_expires_label"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

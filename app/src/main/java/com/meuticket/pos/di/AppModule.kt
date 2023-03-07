@@ -34,6 +34,10 @@ abstract class AppModule {
 
         @JvmStatic
         @Provides
+        fun provideResources(application: Application) = application.resources
+
+        @JvmStatic
+        @Provides
         @Singleton
         fun provideSharedPreferences(application: Application): SharedPreferences {
             return application.getSharedPreferences("meu_ticket", Context.MODE_PRIVATE)

@@ -1,5 +1,7 @@
 package com.meuticket.pos.register.event.presentation
 
+import android.content.res.Resources
+import com.meuticket.pos.R
 import com.meuticket.pos.base.BaseViewModel
 import com.meuticket.pos.core.livedata.SingleLiveEvent
 import com.meuticket.pos.shared.data.model.Event
@@ -11,6 +13,7 @@ sealed class EventFormViewModelState {
     object SavedSuccess: EventFormViewModelState()
 }
 class EventFormViewModel @Inject constructor(
+    val resources: Resources,
     val eventListInteractor: EventListInteractor
 ): BaseViewModel() {
 
@@ -21,7 +24,7 @@ class EventFormViewModel @Inject constructor(
             val eventExists = eventListInteractor.listEvents().firstOrNull { it.name == name }
 
             if(eventExists != null && eventExists.uid != (event?.uid?: 0))
-                throw RuntimeException("Evento já existe")
+                throw RuntimeException(resources.getString(R.string.event_duplicate_error))
 
             eventListInteractor.save(event, name)
 

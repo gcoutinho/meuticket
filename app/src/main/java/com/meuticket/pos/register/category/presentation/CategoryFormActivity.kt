@@ -3,6 +3,7 @@ package com.meuticket.pos.register.category.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import com.meuticket.pos.R
 import com.meuticket.pos.base.BaseMvvmActivity
 import com.meuticket.pos.base.viewBinding
 import com.meuticket.pos.core.livedata.SafeObserver
@@ -53,8 +54,8 @@ class CategoryFormActivity: BaseMvvmActivity() {
     private fun showSuccessDialog() {
 
         showAlertDialog(
-            title = "Sucesso",
-            message = "Dados salvos com sucesso!",
+            title = getString(R.string.success),
+            message = getString(R.string.saved_success_message),
             primaryButtonAction = {
                 setResult(RESULT_OK)
                 finish()

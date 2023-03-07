@@ -21,23 +21,23 @@
         <com.meuticket.pos.ui.components.ViewInput
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:label="Login *"
+            app:label="@string/login_user_label"
             android:id="@+id/name"
-            app:hint="Digite o login do usuário"/>
+            app:hint="@string/login_user_hint"/>
 
         <com.meuticket.pos.ui.components.ViewInput
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:label="Senha *"
+            app:label="@string/login_password_label"
             android:id="@+id/password"
             app:inputType="textPassword"
             android:layout_marginTop="@dimen/padding_medium3"
-            app:hint="Digite a senha do usuário"/>
+            app:hint="@string/login_password_hint"/>
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="É administrador?"
+            android:text="@string/user_admin_checkbox"
             android:layoutDirection="rtl"
             android:id="@+id/is_admin"/>
 
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/PrimaryButton"
-            android:text="Cadastrar"
+            android:text="@string/submit_save"
             android:id="@+id/submit"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin_large"/>

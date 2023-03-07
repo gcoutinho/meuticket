@@ -2,6 +2,7 @@ package com.meuticket.pos.register.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import com.meuticket.pos.R
 import com.meuticket.pos.base.BaseMvvmActivity
 import com.meuticket.pos.base.BaseViewModel
 import com.meuticket.pos.base.viewBinding
@@ -22,7 +23,7 @@ class RegisterActivity: BaseMvvmActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
-        title = "Cadastros"
+        title = getString(R.string.register_title)
 
         binding.registerProducts.setOnClickListener {
             startActivity(Intent(this, ProductsRegisterActivity::class.java))

@@ -1,5 +1,7 @@
 package com.meuticket.pos.register.products.presentation
 
+import android.content.res.Resources
+import com.meuticket.pos.R
 import com.meuticket.pos.base.BaseViewModel
 import com.meuticket.pos.core.livedata.SingleLiveEvent
 import com.meuticket.pos.shared.data.CategoryRepository
@@ -17,6 +19,7 @@ sealed class ProductFormViewModelState {
 }
 
 class ProductFormViewModel @Inject constructor(
+    val resources: Resources,
     val productsListInteractor: ProductsListInteractor
 ): BaseViewModel() {
 
@@ -44,7 +47,7 @@ class ProductFormViewModel @Inject constructor(
     ) {
         runAsync({
             if(product == null && productsListInteractor.listProducts().firstOrNull { it.name == name } != null) {
-                throw java.lang.RuntimeException("Produto já cadastrado")
+                throw java.lang.RuntimeException(resources.getString(R.string.product_duplicate_error))
             }
             productsListInteractor.insertOrUpdate(product, name, value.parseToBigDecimal()?.toDouble()?:0.0, category, printReceipt)
         }, onSuccess = {

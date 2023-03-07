@@ -52,14 +52,14 @@ class EventRegisterActivity: BaseMvvmActivity() {
         dialog.showNow(supportFragmentManager, "DIALOG")
 
         dialog.apply {
-            title = "Atenção"
-            description = "Deseja excluir o registro?"
-            primaryButtonText = "Sim"
+            title = getString(R.string.warning_alert_title)
+            description = getString(R.string.delete_dialog_message)
+            primaryButtonText = getString(R.string.dialog_yes)
             setPrimaryButtonListener {
                 action.invoke()
                 dismissAllowingStateLoss()
             }
-            secondaryButtonText = "Não"
+            secondaryButtonText = getString(R.string.dialog_no)
             setSecondaryButtonListener {
                 dismissAllowingStateLoss()
             }

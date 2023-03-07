@@ -31,7 +31,7 @@
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="@dimen/footer_height"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:background="@color/light_pure"
@@ -42,7 +42,7 @@
                 <com.meuticket.pos.ui.components.ViewButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pagar R$ 0,00"
+                    android:text="@string/pay_value"
                     android:id="@+id/pay"
                     style="@style/PrimaryButton.SM"/>
 
@@ -69,7 +69,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1"
+                    android:text="@string/one"
                     android:id="@+id/qtd"
                     android:textSize="@dimen/font_size_large"
                     android:layout_marginHorizontal="@dimen/margin_medium2"/>
@@ -85,7 +85,7 @@
                 <com.meuticket.pos.ui.components.ViewButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Atualizar R$ 0,00"
+                    android:text="@string/update_value"
                     android:id="@+id/addToCart"
                     style="@style/HighlightButton.SM"
                     android:layout_marginStart="@dimen/margin_large"/>

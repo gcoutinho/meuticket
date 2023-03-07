@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total R$ 0,00"
+            android:text="@string/total_value"
             android:id="@+id/payment_total"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pago R$ 0,00"
+            android:text="@string/paid_value"
             android:id="@+id/payment_total_paid"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_mdi_cash"
-            app:label="Dinheiro"
+            app:label="@string/payment_cash"
             app:layout_constraintTop_toBottomOf="@id/payment_total_paid"
             app:layout_constraintEnd_toStartOf="@id/guideline"
             android:id="@+id/payment_cash"/>
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_mdi_credit_card_multiple"
-            app:label="Crédito"
+            app:label="@string/payment_credit"
             android:id="@+id/payment_credit"
             app:layout_constraintStart_toEndOf="@id/guideline"
             app:layout_constraintTop_toBottomOf="@id/payment_total_paid"/>
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_mdi_credit_card"
-            app:label="Dinheiro"
+            app:label="@string/payment_debit"
             app:layout_constraintTop_toBottomOf="@id/payment_cash"
             app:layout_constraintEnd_toStartOf="@id/guideline"
             android:id="@+id/payment_debit"/>
@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_mdi_qrcode"
-            app:label="Pix"
+            app:label="@string/payment_pix"
             android:id="@+id/payment_pix"
             app:layout_constraintStart_toEndOf="@id/guideline"
             app:layout_constraintTop_toBottomOf="@id/payment_credit"/>
@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_mdi_credit_card"
-            app:label="Cortesia"
+            app:label="@string/payment_cortesy"
             app:layout_constraintTop_toBottomOf="@id/payment_debit"
             app:layout_constraintEnd_toStartOf="@id/guideline"
             android:id="@+id/payment_cortesy"/>
@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_mdi_qrcode"
-            app:label="Outros"
+            app:label="@string/payment_others"
             android:id="@+id/payment_others"
             app:layout_constraintStart_toEndOf="@id/guideline"
             app:layout_constraintTop_toBottomOf="@id/payment_pix"/>
@@ -93,7 +93,7 @@
             android:layout_width="152dp"
             android:layout_height="wrap_content"
             style="@style/PrimaryButton"
-            android:text="Finalizar"
+            android:text="@string/payment_finish"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

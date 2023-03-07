@@ -21,7 +21,7 @@
             android:id="@+id/search"
             app:drawableEnd="@drawable/ic_lupa"
             app:imeOptions="actionSearch"
-            app:hint="Digite o código ou nome do produto"/>
+            app:hint="@string/product_search_hint"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

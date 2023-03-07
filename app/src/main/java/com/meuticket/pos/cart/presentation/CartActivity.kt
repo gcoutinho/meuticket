@@ -63,14 +63,14 @@ class CartActivity: BaseMvvmActivity() {
 
                     dialog.apply {
                         title = getString(R.string.warning_alert_title)
-                        description = "Deseja remover o item do carrinho?"
-                        primaryButtonText = "Sim"
+                        description = getString(R.string.remove_from_cart_message)
+                        primaryButtonText = getString(R.string.dialog_yes)
                         setPrimaryButtonListener {
                             state.action.invoke()
                             dismissAllowingStateLoss()
                             hideQuantityPicker()
                         }
-                        secondaryButtonText = "Não"
+                        secondaryButtonText = getString(R.string.dialog_no)
                         setSecondaryButtonListener {
                             dismissAllowingStateLoss()
                         }
@@ -82,7 +82,7 @@ class CartActivity: BaseMvvmActivity() {
 
     private fun updateTempCart(quantity: Int, value: Double) {
         binding.qtd.text = quantity.toString()
-        binding.addToCart.text = "Atualizar ${BigDecimal(value).toFormattedCurrency(locale = Locale.getDefault())}"
+        binding.addToCart.text = getString(R.string.update_value, BigDecimal(value).toFormattedCurrency(locale = Locale.getDefault()))
     }
 
     private fun hideQuantityPicker() {

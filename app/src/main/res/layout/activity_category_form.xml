@@ -21,15 +21,15 @@
         <com.meuticket.pos.ui.components.ViewInput
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:label="Nome *"
+            app:label="@string/name_label"
             android:id="@+id/name"
-            app:hint="Digite o nome da categoria"/>
+            app:hint="@string/category_name_hint"/>
 
         <com.meuticket.pos.ui.components.ViewButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/PrimaryButton"
-            android:text="Cadastrar"
+            android:text="@string/submit_save"
             android:id="@+id/submit"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin_large"/>

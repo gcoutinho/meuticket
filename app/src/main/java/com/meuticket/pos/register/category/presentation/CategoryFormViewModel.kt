@@ -1,5 +1,8 @@
 package com.meuticket.pos.register.category.presentation
 
+import android.content.Context
+import android.content.res.Resources
+import com.meuticket.pos.R
 import com.meuticket.pos.base.BaseViewModel
 import com.meuticket.pos.core.livedata.SingleLiveEvent
 import com.meuticket.pos.shared.data.model.Category
@@ -12,6 +15,7 @@ sealed class CategoryFormViewModelState {
     object SavedSuccess: CategoryFormViewModelState()
 }
 class CategoryFormViewModel @Inject constructor(
+    val resources: Resources,
     val interactor: CategoryListInteractor
 ): BaseViewModel() {
 
@@ -19,9 +23,9 @@ class CategoryFormViewModel @Inject constructor(
     fun save(category: Category?, name: String) {
         runAsync({
             if(category == null && interactor.listCategories().firstOrNull { it.name == name } != null)
-                throw java.lang.RuntimeException("Categoria já existe")
+                throw java.lang.RuntimeException(resources.getString(R.string.category_duplicate_error))
             if (name.length < 3)
-                throw java.lang.RuntimeException("Nome precisa ter pelo menos 3 caracteres")
+                throw java.lang.RuntimeException(resources.getString(R.string.category_validation_name_error))
             interactor.save(category, name)
         }, onSuccess = {
             state.value = CategoryFormViewModelState.SavedSuccess
