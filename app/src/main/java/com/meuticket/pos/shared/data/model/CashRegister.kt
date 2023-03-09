@@ -2,6 +2,7 @@ package com.meuticket.pos.shared.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import java.util.*
 
@@ -24,5 +25,8 @@ class CashRegister(
     @ColumnInfo var withdrawTotal: Double = 0.0
     @ColumnInfo var inputsTotal: Double = 0.0
     @ColumnInfo var rollbackTotal: Double = 0.0
+    @ColumnInfo var status: Int = 0
 
+    @Ignore
+    var order: Order? = null
 }
